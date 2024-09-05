@@ -1,0 +1,79 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/Registration.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page for BookSwift</title>
+</head>
+<body>
+    <div class="main">
+        <div class="box1">
+
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <h2>User Registration</h2>
+    <form id="registrationForm" action="http://localhost:3001/register-user" method="post">
+
+        <input type="text" name="name" placeholder="Name" required><br><br>
+        <input type="text" name="address" placeholder="Address" required><br><br>
+        <input type="email" name="email" placeholder="Email" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
+        <input type="text" name="username" placeholder="Username" required><br><br>
+        <select name="language" required>
+            <option value="" disabled selected>Select Language</option>
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+            <option value="French">French</option>
+            <option value="Spanish">Spanish</option>
+        </select><br><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get the form data
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                address: formData.get('address'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+                username: formData.get('username'),
+                language: formData.get('language')
+            };
+
+            // Send the data to the server
+            const response = await fetch('http://localhost:3001/register-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            // Handle the response
+            const result = await response.json();
+            if (result.success) {
+                alert('User registered successfully!');
+            } else {
+                alert('Failed to register user: ' + result.error);
+            }
+        });
+    </script>
+</body>
+</html>
