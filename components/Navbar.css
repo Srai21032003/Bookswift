@@ -1,0 +1,81 @@
+
+.navbar {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 24;
+    font-weight: bold;
+    font-family: ;
+    position: fixed;
+    top: 29px;
+    left: 121px;
+    right: 121px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .nav-item:hover {
+    color: #E2E8F0; /* Tailwind's gray-300 */
+  }
+  
+  .search-signup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height:40px;
+  }
+  
+  .search-container {
+    position: relative;
+  }
+
+  
+  .search-input {
+    background-color: #D6BCFA; /* Tailwind's purple-300 */
+    color: black;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    border: none;
+    outline: none;
+    width: 360px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    color: black;
+  }
+  
+  .signup-button {
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 136px;
+  }
+  
+  .signup-button:hover {
+    background-color: #2D3748; /* Tailwind's gray-800 */
+  }
+  
