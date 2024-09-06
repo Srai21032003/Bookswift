@@ -118,8 +118,10 @@ const cors = require("cors");
 const corsOptions = {
   origin: "http://localhost:5173",
 };
-app.use(cors(corsOptions));
-
+app.use(cors());
+app.get("/api", (req, res) => {
+  return res.json({ message: "This is from backend " });
+});
 // Static files setup
 app.use(express.static('./public'));
 
