@@ -1,0 +1,49 @@
+.Featured {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 24;
+    color: black;
+    margin-top: 140px;
+  }
+  .model{
+    align-items: center;
+    
+  }
+  .head{
+    font-size: 64px;
+    font-family: "Playfair Display SC";
+  }
+  .sub-description{
+    max-width: 300px;
+  }
+  #shopnow{
+    background-color: black;
+    color: white;
+    border-radius: 50px;
+    margin: 10px 0;
+  }
+  .button{
+    padding: 0 10px;
+    margin: 0 10px;
+  }
+  .model{
+    align-self: center;
+    margin-left: 230px;
+  }
+  .catagories 
+  {
+   margin-left: 150px; 
+  }
+  .catagory{
+    margin: 5%;
+    transition: opacity 1s ease-in-out;
+  opacity: 1;
+  transform: translateY(-30%);
+  }
+  #catagory{
+    transform: translateY(55%);
+  }

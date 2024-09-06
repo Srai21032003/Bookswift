@@ -1,0 +1,127 @@
+* {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --book-width: 325px;
+    --book-height: 670px;
+    --book-radius: 25px;
+    --separator-height: 500px;
+    --bg: #fdf3f2;
+    --book-bg: #fdeae6;
+    --intro-bg: #eed7d1;
+    --font-color: #807b7b;
+    --transition: transform 0.7s ease-in-out;
+}
+  
+
+.explore {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg);
+    width: 1400px;
+}
+  
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10%;
+    width: 1300px;
+}
+  
+.book {
+    width: var(--book-width);
+    height: var(--book-height);
+    margin: 30px 0;
+    border-radius: var(--book-radius);
+    perspective: 500px;
+    overflow: hidden;
+    color: var(--font-color);
+    background-color: var(--book-bg);
+    box-shadow: 36px 36px 50px 15px rgba(238, 215, 209, 0.82);
+    transition: var(--transition);
+}
+
+.book-cover {
+    position: relative;
+    height: var(--separator-height);
+    width: calc(var(--book-width) * 2);
+    left: -52.5%;
+    border-top-left-radius: var(--book-radius);
+    border-top-right-radius: var(--book-radius);
+    background-color: var(--intro-bg);
+    transform-style: preserve-3d;
+    transform-origin: 50% 40%;
+    transition: var(--transition);
+    z-index: 4;
+}
+  
+.book-top {
+    width: 170px;
+    position: absolute;
+    top: 180px;
+    left: 250px;
+    z-index: 5;
+    transform: translateZ(28.5px);
+}
+
+.book-side {
+    position: absolute;
+    top: 430px;
+    left: 222px;
+    transform: translateY(-15px) translateX(0px) translateZ(15px) rotateX(104deg);
+}
+
+.book:hover .book-cover {
+    transform: rotateX(75deg) translateZ(3px) scale(0.75);
+}
+
+.book:hover .preface {
+    transform: translateY(-302px);
+}
+
+.book:hover .preface .icon {
+    transform: rotateX(180deg);
+}
+
+.preface {
+    height: var(--separator-height);
+    padding: 50px;
+    transition: var(--transition);
+    background: white;
+}
+
+.preface .header {
+    display: flex;
+    align-items: center;
+}
+
+.preface .title {
+    font-family: "Quicksand", sans-serif;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.preface .author {
+    font-family: "Open Sans", sans-serif;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.preface .icon {
+    transform-origin: top;
+    transition: var(--transition);
+}
+
+.preface .body {
+    font-family: "Quicksand", sans-serif;
+}
+
+.preface .body p:first-child {
+    margin-bottom: 15px;
+}
+ 
