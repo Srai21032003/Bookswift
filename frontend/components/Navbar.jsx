@@ -25,7 +25,7 @@ const Navbar = () => {
           </span>
         </div>
 
-        <button className="signup-button">
+        <button className="signup-button" href="">
           Sign Up
         </button>
       </div>
