@@ -17,12 +17,50 @@
     <!-- Login Form -->
     <div class="form-container">
         <h2>Login</h2>
-        <form>
+        <form id="loginForm">
             <!-- Form Fields -->
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+
+        <!-- Response Message -->
+        <p id="responseMessage"></p>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();  // Prevent form from submitting the traditional way
+    
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            try {
+                const response = await fetch('http://localhost:3001/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
+                });
+    
+                // Check if the response is OK (status in the range 200-299)
+                if (response.ok) {
+                    const result = await response.json();
+                    const messageElement = document.getElementById('responseMessage');
+                    messageElement.textContent = 'Login successful! Redirecting...';
+    
+                    // Redirect to the home page
+                    window.location.href = '/'; // Adjust the URL as needed
+                } else {
+                    const result = await response.json();
+                    const messageElement = document.getElementById('responseMessage');
+                    messageElement.textContent = `Error: ${result.error}`;
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                document.getElementById('responseMessage').textContent = 'Failed to login.';
+            }
+        });
+    </script>
+    
 </body>
 </html>
