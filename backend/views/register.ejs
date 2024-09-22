@@ -26,19 +26,19 @@
 <body>
     <h2>User Registration</h2>
     <form id="registrationForm" action="http://localhost:3001/register-user" method="post">
-
         <input type="text" name="name" placeholder="Name" required><br><br>
-        <input type="text" name="address" placeholder="Address" required><br><br>
         <input type="email" name="email" placeholder="Email" required><br><br>
         <input type="password" name="password" placeholder="Password" required><br><br>
-        <input type="text" name="username" placeholder="Username" required><br><br>
-        <select name="language" required>
-            <option value="" disabled selected>Select Language</option>
-            <option value="English">English</option>
-            <option value="Hindi">Hindi</option>
-            <option value="French">French</option>
-            <option value="Spanish">Spanish</option>
+        <input type="text" name="phone" placeholder="Phone No." required><br><br>
+
+        <label for="userType">User Type</label>
+        <select name="userType" id="userType" required>
+            <option value="" disabled selected>Select User Type</option>
+            <option value="Customer">Customer</option>
+            <option value="Bookstore Owner">Bookstore Owner</option>
+            <option value="Admin">Admin</option>
         </select><br><br>
+
         <button type="submit">Register</button>
     </form>
 
@@ -50,11 +50,10 @@
             const formData = new FormData(this);
             const data = {
                 name: formData.get('name'),
-                address: formData.get('address'),
                 email: formData.get('email'),
                 password: formData.get('password'),
-                username: formData.get('username'),
-                language: formData.get('language')
+                phone: formData.get('phone'),
+                userType: formData.get('userType')
             };
 
             // Send the data to the server
@@ -77,3 +76,4 @@
     </script>
 </body>
 </html>
+

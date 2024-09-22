@@ -158,13 +158,14 @@ app.get('/register-user', function (req, res) {
      
 // Route to add a new user with a password
 app.post('/register-user', async (req, res) => {
-    const { name, address, email, password, username, language } = req.body;
+    const { name, email, password, phone, userType } = req.body;
     console.log('Attempting to connect to PostgreSQL and add a new user...');
+    
     try {
-        console.log(name, address, email, password, username, language);
+        console.log(name, email, password, phone, userType);
         const result = await pool.query(
-            'INSERT INTO users (name, address, email, password, username, language) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            [name, address, email, password, username, language]
+            'INSERT INTO users (name, email, password, phone, user_type) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [name, email, password, phone, userType]
         );
         console.log('User successfully added:', result.rows[0]);
         res.json({ success: true, user: result.rows[0] });
@@ -173,6 +174,7 @@ app.post('/register-user', async (req, res) => {
         res.status(500).json({ error: 'Failed to register user' });
     }
 });
+
 
 
 app.get('/', function (req, res) {
