@@ -32,13 +32,8 @@ const Navbar = () => {
           </span>
         </div>
 
-<<<<<<< HEAD
-        <button className="signup-button" href="">
-          Sign Up
-=======
         <button className="signup-button" onClick={handleSignupClick}>
           Login/Sign Up
->>>>>>> 98f846f687577fc041cbfe44c8812402a8b3fc12
         </button>
       </div>
     </nav>

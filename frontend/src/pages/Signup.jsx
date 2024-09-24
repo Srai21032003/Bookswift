@@ -8,15 +8,33 @@ function Signup() {
         setPasswordVisible(!passwordVisible);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
         const phone = event.target.phone.value;
         const userType = event.target['user-type'].value;
-        // Add registration logic here
-        alert('Registration successful!');
+        try {
+            const response = await fetch('/.netlify/functions/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, password, phone, userType }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setMessage('Registration successful!');
+            } else {
+                const errorData = await response.json();
+                setMessage(`Registration failed: ${errorData.message}`);
+            }
+        } catch (error) {
+            setMessage(`An error occurred: ${error.message}`);
+        }
+
     };
 
     return (
