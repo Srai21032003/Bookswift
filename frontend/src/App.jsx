@@ -20,7 +20,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ExplorePage from '../components/Explore';
 import './App.css'
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
+import Login from './pages/Login';  // Import Login Component
+import Register from './pages/Signup';  // Import Register Component
+import Options from '../components/Options';  // Import Options Component
 
 function App() {
   const [data, setData] = useState(null)
@@ -38,6 +41,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/options" element={<Options />} />
       </Routes>
     </Router>
   );

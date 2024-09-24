@@ -1,7 +1,14 @@
 import React from 'react';
-import './Navbar.css'; // Import the corresponding CSS file
+import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook for navigation
+import './Navbar.css';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleSignupClick = () => {
+    navigate('/options'); // Redirect to the options page
+  };
+
   return (
     <nav className="navbar">
       <ul className="nav-links">
@@ -25,8 +32,13 @@ const Navbar = () => {
           </span>
         </div>
 
+<<<<<<< HEAD
         <button className="signup-button" href="">
           Sign Up
+=======
+        <button className="signup-button" onClick={handleSignupClick}>
+          Login/Sign Up
+>>>>>>> 98f846f687577fc041cbfe44c8812402a8b3fc12
         </button>
       </div>
     </nav>
