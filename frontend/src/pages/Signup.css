@@ -21,6 +21,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 350px;
+    height: 95vh;
 }
 
 .logo {
@@ -58,6 +59,7 @@ h2 {
     /* Input background */
     color: #2f2a53;
     /* Dark text for inputs */
+    height: 5vh;
 }
 
 .input-group input:focus,
@@ -128,4 +130,7 @@ h2 {
 
 .login a:hover {
     text-decoration: underline;
+}
+#user-type {
+    padding: 0;
 }
