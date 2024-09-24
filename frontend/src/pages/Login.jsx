@@ -23,7 +23,7 @@ function Login() {
     return (
         <div className="login-container">
             <div className="logo">
-                <img src="image.png" alt="Book Swift" width="200" />
+                <img src="/assets/logo.png" alt="Book Swift" width="200" />
             </div>
             <h2>LOGIN</h2>
             <form id="loginForm" onSubmit={handleSubmit}>

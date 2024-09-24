@@ -23,7 +23,7 @@ function Signup() {
         <div>
             <div className="register-container">
                 <div className="logo">
-                    <img src="../assets/logo.png" alt="Book Swift" width="200" />
+                    <img src="/assets/logo.png" alt="Book Swift" width="200" />
                 </div>
                 <h2>REGISTER</h2>
                 <form id="registerForm" onSubmit={handleSubmit}>
