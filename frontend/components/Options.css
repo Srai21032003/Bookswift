@@ -1,0 +1,68 @@
+/* Centering the container */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    background-color: #f0f4f8;
+    width: 50vh;
+    font-family: 'Arial', sans-serif;
+    border-radius: 20%;
+}
+
+.options-container h2 {
+    font-size: 24px;
+    margin: 5%;
+    color: black;
+}
+
+/* Styling the buttons */
+.options-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-option {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#left.btn-option:hover {
+    background-color: rgba(126, 85, 177, 1)
+}
+
+#right.btn-option:hover {
+    background-color: rgba(144, 119, 175, 1);
+}
+
+/* Optional: responsive design for smaller screens */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .btn-option {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .options-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+#left.btn-option {
+    background-color: rgba(144, 119, 175, 1);
+}
+
+#right {
+    background-color: rgba(126, 85, 177, 1);
+}

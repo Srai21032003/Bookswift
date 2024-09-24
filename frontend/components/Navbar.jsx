@@ -33,7 +33,7 @@ const Navbar = () => {
         </div>
 
         <button className="signup-button" onClick={handleSignupClick}>
-          Sign Up
+          Login/Sign Up
         </button>
       </div>
     </nav>
