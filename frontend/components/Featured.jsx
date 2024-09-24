@@ -53,19 +53,19 @@ const Featured = () => {
         <div><Link to="/explore"><button id="shopnow">SHOP NOW</button></Link></div>
       </div>
       <div className="model">
-        <img src='../src/assets/girl.png' alt="" />
+        <img src='/assets/girl.png' alt="" />
       </div>
       <div className="catagories">
         {activeCategory === 0 && (
           <div className="catagory">
-            <div><img id='catagory' src='../src/assets/cata.png' alt="" /></div>
-            <div><img src='../src/assets/rectangle.png' alt="" /></div>
+            <div><img id='catagory' src='/assets/cata.png' alt="" /></div>
+            <div><img src='/assets/rectangle.png' alt="" /></div>
           </div>
         )}
         {activeCategory === 1 && (
           <div className="catagory">
-            <div><img id='catagory' src='../src/assets/cata2.png' alt="" /></div>
-            <div><img src='../src/assets/rectangle.png' alt="" /></div>
+            <div><img id='catagory' src='/assets/cata2.png' alt="" /></div>
+            <div><img src='/assets/rectangle.png' alt="" /></div>
           </div>
         )}
       </div>
