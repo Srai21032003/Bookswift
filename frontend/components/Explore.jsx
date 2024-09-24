@@ -16,7 +16,7 @@ const Explore = () => {
               <div className="book">
                   
           <div className="book-cover">
-            <img className="book-top" src="../src/assets/c1.png" alt="Art Design" />
+            <img className="book-top" src="/assets/c1.png" alt="Art Design" />
             <img className="book-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
           </div>
           <div className="preface">
@@ -37,7 +37,7 @@ const Explore = () => {
               <div className="book">
                   
                   <div className="book-cover">
-                    <img className="book-top" src="../src/assets/c1.png" alt="Art Design" />
+                    <img className="book-top" src="/assets/c1.png" alt="Art Design" />
                     <img className="book-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
                   </div>
                   <div className="preface">

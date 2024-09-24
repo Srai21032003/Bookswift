@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #9e7fc3;
+    /* Purple background from the image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: #d9b8e5;
+    /* Lighter purple from the image */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #2f2a53;
+    /* Darker text color similar to the image */
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2f2a53;
+    /* Text color */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid #7b62b3;
+    /* Input border color */
+    background-color: #bba3cf;
+    /* Input background matching the theme */
+    color: #2f2a53;
+    /* Dark text for inputs */
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #4b3f84;
+    /* Focus border color */
+}
+
+.input-group .password-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-container input {
+    flex: 1;
+}
+
+.password-container .toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #2f2a53;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #2f2a53;
+}
+
+.actions a {
+    color: #2f2a53;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.actions a:hover {
+    text-decoration: underline;
+}
+
+.btn-login {
+    width: auto;
+    padding: 8px 20px;
+    /* Smaller padding */
+    background-color: #2f2a53;
+    /* Button color matching the theme */
+    color: white;
+    border: none;
+    border-radius: 15px;
+    /* Smaller border-radius */
+    font-size: 14px;
+    /* Smaller font size */
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    /* Center the button */
+}
+
+.btn-login:hover {
+    background-color: #1e1940;
+}
+
+.signup {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #2f2a53;
+}
+
+.signup a {
+    color: #2f2a53;
+    text-decoration: none;
+}
+
+.signup a:hover {
+    text-decoration: underline;
+}

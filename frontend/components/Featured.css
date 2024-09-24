@@ -8,6 +8,7 @@
     font-size: 24;
     color: black;
     margin-top: 140px;
+    margin-left: ;
   }
   .model{
     align-items: center;
@@ -32,7 +33,7 @@
   }
   .model{
     align-self: center;
-    margin-left: 230px;
+    margin-left: 26vh;
   }
   .catagories 
   {
