@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import './Signup.css';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
+    const navigate = useNavigate(); // Initialize the hook
+
+  const handleLoginRedirect = () => {
+    navigate('/login'); // Redirect to the login page
+  };
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const togglePassword = () => {
@@ -41,7 +47,7 @@ function Signup() {
         <div>
             <div className="register-container">
                 <div className="logo">
-                    <img src="image.png" alt="Book Swift" width="200" />
+                    <img src="/assets/logo.png" alt="Book Swift" width="200" />
                 </div>
                 <h2>REGISTER</h2>
                 <form id="registerForm" onSubmit={handleSubmit}>
@@ -83,14 +89,13 @@ function Signup() {
                         <select id="user-type" name="user-type" required>
                             <option value="">Select User Type</option>
                             <option value="customer">Customer</option>
-                            <option value="student">Student</option>
                             <option value="bookowner">Book Owner</option>
                         </select>
                     </div>
                     <button type="submit" className="btn-register">REGISTER</button>
                 </form>
                 <div className="login">
-                    Already have an Account? <a href="#">Login</a>
+                    Already have an Account? <a href="#" onClick={handleLoginRedirect}>Login</a>
                 </div>
             </div>
         </div>
