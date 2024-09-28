@@ -40,7 +40,7 @@ const SearchResultsPage = () => {
         <button>Wellness</button>
         <button>Kids Books</button>
       </div>
-      <div className="books-grid">
+      <div className="book1s-grid">
         {results.length === 0 ? (
           <p>No results found.</p>
         ) : (
