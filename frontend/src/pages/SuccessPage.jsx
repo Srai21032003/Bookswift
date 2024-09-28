@@ -4,7 +4,7 @@ function SuccessPage() {
     return (
         <div className="success-container">
             <h1>Registration Successful!</h1>
-            <p>Thank you for registering. You can now <a href="/login">log in</a>.</p>
+            <p>Thank you for registering. You can now <a href="/login">Log in</a>.</p>
         </div>
     );
 }
