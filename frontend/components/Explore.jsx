@@ -10,14 +10,14 @@ const Explore = () => {
         <button>Fiction</button>
         <button>Non-Fiction</button>
         <button>Wellness</button>
-        <button>Kids Books</button>
+        <button>Kids books</button>
       </div>
-      <div className="books-grid">
-              <div className="book">
+      <div className="book1s-grid">
+              <div className="book1">
                   
-          <div className="book-cover">
-            <img className="book-top" src="/assets/c1.png" alt="Art Design" />
-            <img className="book-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
+          <div className="book1-cover">
+            <img className="book1-top" src="/assets/c1.png" alt="Art Design" />
+            <img className="book1-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
           </div>
           <div className="preface">
             <div className="header">
@@ -33,12 +33,12 @@ const Explore = () => {
             </div>
           </div>
         </div>
-              {/* Add more book items similarly */}
-              <div className="book">
+              {/* Add more book1 items similarly */}
+              <div className="book1">
                   
-                  <div className="book-cover">
-                    <img className="book-top" src="/assets/c1.png" alt="Art Design" />
-                    <img className="book-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
+                  <div className="book1-cover">
+                    <img className="book1-top" src="/assets/c1.png" alt="Art Design" />
+                    <img className="book1-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
                   </div>
                   <div className="preface">
                     <div className="header">

@@ -4,12 +4,12 @@
     box-sizing: border-box;
 }
 :root {
-    --book-width: 325px;
-    --book-height: 670px;
-    --book-radius: 25px;
+    --book1-width: 325px;
+        --book1-height: 670px;
+        --book1-radius: 25px;
     --separator-height: 500px;
     --bg: #fdf3f2;
-    --book-bg: #fdeae6;
+    --book1-bg: #fdeae6;
     --intro-bg: #eed7d1;
     --font-color: #807b7b;
     --transition: transform 0.7s ease-in-out;
@@ -26,33 +26,33 @@
     width: 1400px;
 }
   
-.books-grid {
+.book1s-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10%;
     width: 1300px;
 }
   
-.book {
-    width: var(--book-width);
-    height: var(--book-height);
+.book1 {
+    width: var(--book1-width);
+    height: var(--book1-height);
     margin: 30px 0;
-    border-radius: var(--book-radius);
+    border-radius: var(--book1-radius);
     perspective: 500px;
     overflow: hidden;
     color: var(--font-color);
-    background-color: var(--book-bg);
+    background-color: var(--book1-bg);
     box-shadow: 36px 36px 50px 15px rgba(238, 215, 209, 0.82);
     transition: var(--transition);
 }
 
-.book-cover {
+.book1-cover {
     position: relative;
     height: var(--separator-height);
-    width: calc(var(--book-width) * 2);
+    width: calc(var(--book1-width) * 2);
     left: -52.5%;
-    border-top-left-radius: var(--book-radius);
-    border-top-right-radius: var(--book-radius);
+    border-top-left-radius: var(--book1-radius);
+        border-top-right-radius: var(--book1-radius);
     background-color: var(--intro-bg);
     transform-style: preserve-3d;
     transform-origin: 50% 40%;
@@ -60,7 +60,7 @@
     z-index: 4;
 }
   
-.book-top {
+.book1-top {
     width: 170px;
     position: absolute;
     top: 180px;
@@ -69,22 +69,22 @@
     transform: translateZ(28.5px);
 }
 
-.book-side {
+.book1-side {
     position: absolute;
     top: 430px;
     left: 222px;
     transform: translateY(-15px) translateX(0px) translateZ(15px) rotateX(104deg);
 }
 
-.book:hover .book-cover {
+.book1:hover .book1-cover {
     transform: rotateX(75deg) translateZ(3px) scale(0.75);
 }
 
-.book:hover .preface {
+.book1:hover .preface {
     transform: translateY(-302px);
 }
 
-.book:hover .preface .icon {
+.book1:hover .preface .icon {
     transform: rotateX(180deg);
 }
 
