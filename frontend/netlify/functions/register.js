@@ -116,6 +116,31 @@ export async function handler(event) {
     // Start a transaction
     await sql('BEGIN');
 
+
+    const checkUserQuery = `
+      SELECT * FROM Users WHERE username = $1 OR email = $2
+    `;
+    const checkUserResult = await sql(checkUserQuery, [name, email]);
+
+    if (checkUserResult.length > 0) {
+      const existingUser = checkUserResult[0];
+
+      let conflictField = '';
+      if (existingUser.username === name) {
+        conflictField = 'username';
+      } else if (existingUser.email === email) {
+        conflictField = 'email';
+      }
+
+      return {
+        statusCode: 409,
+        body: JSON.stringify({
+          message: `${conflictField.charAt(0).toUpperCase() + conflictField.slice(1)} already exists. Please try another one.`,
+        }),
+      };
+    }
+
+
     // Generate a unique user ID
     const userId = generateUserId();
 

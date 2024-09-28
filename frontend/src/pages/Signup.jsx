@@ -32,6 +32,9 @@ function Signup() {
 
             if (response.ok) {
                 navigate('/success');
+            } else if (response.status === 409) {
+                const errorData = await response.json();
+                window.alert(errorData.message);
             } else {
                 const errorData = await response.json();
                 setMessage(`Registration failed: ${errorData.message}`);

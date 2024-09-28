@@ -22,6 +22,7 @@ import ExplorePage from '../components/Explore';
 import './App.css'
 import { useEffect, useState } from 'react';
 import Login from './pages/Login';  // Import Login Component
+import SuccessPage from './pages/SuccessPage';
 import Register from './pages/Signup';  // Import Register Component
 import Options from '../components/Options';  // Import Options Component
 
