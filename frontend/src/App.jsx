@@ -22,6 +22,7 @@ import ExplorePage from '../components/Explore';
 import './App.css'
 import { useEffect, useState } from 'react';
 import Login from './pages/Login';  // Import Login Component
+import SuccessPage from './pages/SuccessPage';
 import Register from './pages/Signup';  // Import Register Component
 import Options from '../components/Options';  // Import Options Component
 import Cart from './pages/Cart';
@@ -43,6 +44,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/success" element={<SuccessPage />} />
           <Route path="/register" element={<Register />} />
         <Route path="/options" element={<Options />} />
         <Route path="/cart" element={<Cart/>}></Route>
