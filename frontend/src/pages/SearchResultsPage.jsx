@@ -47,7 +47,7 @@ const SearchResultsPage = () => {
           results.map((book) => (
             <div className="book" key={book.book_id}> {/* Assuming book.book_id is the unique identifier */}
               <div className="book-cover">
-                <img className="book-top" src={book.cover_img_url || '/assets/default-cover.png'} alt={book.title} />
+                <img className="book-top" src={book.cover_img_url || '/assets/c1.png'} alt={book.title} />
                 <img className="book-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
               </div>
               <div className="preface">
