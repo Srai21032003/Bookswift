@@ -23,6 +23,7 @@ import './App.css'
 import { useEffect, useState } from 'react';
 import Login from './pages/Login';  // Import Login Component
 import SuccessPage from './pages/SuccessPage';
+import SearchResultsPage from './pages/SearchResultsPage';
 import Register from './pages/Signup';  // Import Register Component
 import Options from '../components/Options';  // Import Options Component
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/success" element={<SuccessPage />} />
+        <Route path="/search-results" element={<SearchResultsPage />} /> {/* New search results page */}
           <Route path="/register" element={<Register />} />
           <Route path="/options" element={<Options />} />
       </Routes>

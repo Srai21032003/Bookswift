@@ -1,0 +1,44 @@
+/* Navbar.css */
+
+.navbar {
+    /* your existing navbar styles */
+    position: relative; /* Necessary for absolute positioning of search results */
+  }
+  
+  .search-signup {
+    position: relative; /* Ensure positioning context for search results */
+  }
+  
+  .search-results-container {
+    width: 100%; /* Make the container full width */
+    position: absolute; /* Position it below the search input */
+    top: 50px; /* Adjust this based on the height of your navbar */
+    left: 0; 
+    z-index: 10; /* Ensure it appears above other elements */
+  }
+  
+  .search-results {
+    /* Add styles for the search results */
+    border: 1px solid #ccc; /* Optional border for results */
+    background-color: white; /* Background color for results */
+    max-height: 200px; /* Limit height of results */
+    overflow-y: auto; /* Add scroll if too many results */
+    width: 100%; /* Match the width of the search bar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+  }
+  
+  .search-results ul {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .search-results li {
+    padding: 10px; /* Space out results */
+    cursor: pointer; /* Indicate clickable items */
+  }
+  
+  .search-results li:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+  }
+  
