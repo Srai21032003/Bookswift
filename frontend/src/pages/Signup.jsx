@@ -31,8 +31,7 @@ function Signup() {
             });
 
             if (response.ok) {
-                const data = await response.json();
-                setMessage('Registration successful!');
+                navigate('/success');
             } else {
                 const errorData = await response.json();
                 setMessage(`Registration failed: ${errorData.message}`);
