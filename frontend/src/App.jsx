@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import Login from './pages/Login';  // Import Login Component
 import Register from './pages/Signup';  // Import Register Component
 import Options from '../components/Options';  // Import Options Component
+import Cart from './pages/Cart';
 
 function App() {
   const [data, setData] = useState(null)
@@ -43,7 +44,8 @@ function App() {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/options" element={<Options />} />
+        <Route path="/options" element={<Options />} />
+        <Route path="/cart" element={<Cart/>}></Route>
       </Routes>
     </Router>
   );
