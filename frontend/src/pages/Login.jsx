@@ -33,7 +33,7 @@ function Login() {
 
             if (response.ok) {
                 alert('Login successful!');
-                navigate('/'); // Redirect to the home page
+                navigate('/test'); // Redirect to the home page
             } else {
                 alert(data.message || 'Invalid email or password!');
             }
