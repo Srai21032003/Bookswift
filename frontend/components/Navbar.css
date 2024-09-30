@@ -79,3 +79,49 @@
     background-color: #2D3748; /* Tailwind's gray-800 */
   }
   
+.w3 {
+  color: black;
+  margin: 25%;
+}
+
+.w3:hover {
+  color: white;
+}
+
+.w3 :focus {
+  color: white;
+}
+
+/* Container for dropdown */
+.icon-container {
+  position: relative;
+  display: flex;
+}
+
+/* Profile dropdown styling */
+.profile-dropdown {
+  position: absolute;
+  top: 40px;
+  /* Adjust depending on your design */
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  color: black;
+  text-align: left;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}

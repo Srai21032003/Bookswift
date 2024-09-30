@@ -27,6 +27,7 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import Register from './pages/Signup';  // Import Register Component
 import Options from '../components/Options';  // Import Options Component
 import Cart from './pages/Cart';
+import Test from './pages/HomePagel'
 
 function App() {
   const [data, setData] = useState(null)
@@ -49,7 +50,8 @@ function App() {
         <Route path="/search-results" element={<SearchResultsPage />} /> {/* New search results page */}
           <Route path="/register" element={<Register />} />
         <Route path="/options" element={<Options />} />
-        <Route path="/cart" element={<Cart/>}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/test" element={<Test />}></Route>
       </Routes>
     </Router>
   );
