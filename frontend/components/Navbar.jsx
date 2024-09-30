@@ -22,7 +22,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
+      <img src="/assets/logo.png" alt="" className='logo'/>
       <ul className="nav-links">
+      
         <li className="nav-item">Home</li>
         <li className="nav-item">About</li>
         <li className="nav-item">Features</li>

@@ -60,7 +60,8 @@ const Navbar = () => {
   }, [dropdownRef]);
 
   return (
-    <nav className="navbar">
+      <nav className="navbar">
+          <img src="/assets/logo.png" alt="" className='logo'/>
       <ul className="nav-links">
         <li className="nav-item">Home</li>
         <li className="nav-item">About</li>
@@ -98,7 +99,8 @@ const Navbar = () => {
 
           {/* Profile Dropdown */}
           {isProfileDropdownOpen && (
-            <div className="profile-dropdown" ref={dropdownRef}>
+                      <div className="profile-dropdown" ref={dropdownRef}>
+                       <h4 className='dropdown-item' id='profile-name'> Name </h4>
               <button onClick={handleEditProfile} className="dropdown-item">Edit Profile</button>
               <button onClick={handleLogout} className="dropdown-item">Logout</button>
             </div>
