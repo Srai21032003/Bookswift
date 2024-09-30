@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.5",
+    "bcryptjs": "^2.4.3",
     "bookswift": "file:",
     "pg": "^8.13.0",
     "react": "^18.3.1",

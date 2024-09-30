@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
     const navigate = useNavigate(); // Initialize the hook
 
-  const handleSignupRedirect = () => {
-    navigate('/Register'); // Redirect to the login page
-  };
+    const handleSignupRedirect = () => {
+        navigate('/Register'); // Redirect to the Register page
+    };
+
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,13 +17,29 @@ function Login() {
         setPasswordVisible(!passwordVisible);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (email === 'user@example.com' && password === 'password123') {
-            alert('Login successful!');
-            // Redirect or further logic here
-        } else {
-            alert('Invalid email or password!');
+
+        try {
+            const response = await fetch('/.netlify/functions/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert('Login successful!');
+                navigate('/'); // Redirect to the home page
+            } else {
+                alert(data.message || 'Invalid email or password!');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('Something went wrong. Please try again.');
         }
     };
 
