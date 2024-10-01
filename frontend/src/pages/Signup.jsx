@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import { useNavigate } from 'react-router-dom';
+import { handleLogin } from '../../components/utils';
 
 function Signup() {
     const navigate = useNavigate(); // Initialize the hook
 
-  const handleLoginRedirect = () => {
-    navigate('/login'); // Redirect to the login page
-  };
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const togglePassword = () => {
@@ -97,7 +95,7 @@ function Signup() {
                     <button type="submit" className="btn-register">REGISTER</button>
                 </form>
                 <div className="login">
-                    Already have an Account? <a href="#" onClick={handleLoginRedirect}>Login</a>
+                    Already have an Account? <a href="#" onClick={()=>handleLogin(navigate)}>Login</a>
                 </div>
             </div>
         </div>

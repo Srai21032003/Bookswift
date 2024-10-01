@@ -1,26 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Ensure you're using React Router
-import './Options.css'
+import './Options.css';
+import { handleLogin,handleRegister } from './utils';
 
 const Options = () => {
   const navigate = useNavigate();
-
-  const handleLogin = () => {
-    navigate('/login'); // Redirect to Login component
-  };
-
-  const handleRegister = () => {
-    navigate('/register'); // Redirect to Register component
-  };
-
   return (
     <div className="options-container">
       <h2>Choose an Option</h2>
       <div className="options-buttons">
-        <button className="btn-option" id='left' onClick={handleLogin}>
+      <button className="btn-option" id='left' onClick={() => handleLogin(navigate)}>
           Login
         </button>
-        <button className="btn-option" id='right' onClick={handleRegister}>
+        <button className="btn-option" id='right' onClick={() => handleRegister(navigate)}>
           Signup
         </button>
       </div>
