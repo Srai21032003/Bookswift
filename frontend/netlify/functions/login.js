@@ -1,5 +1,9 @@
+// login.js
 import { neon } from '@neondatabase/serverless';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-very-secret-key';
 
 export async function handler(event) {
     if (event.httpMethod !== 'POST') {
@@ -21,7 +25,6 @@ export async function handler(event) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-        // Fetch user from the database
         const userQuery = `SELECT * FROM Users WHERE email = $1`;
         const userResult = await sql(userQuery, [email]);
 
@@ -34,7 +37,6 @@ export async function handler(event) {
 
         const user = userResult[0];
 
-        // Compare the hashed password
         const isPasswordValid = await bcrypt.compare(password, user.password_hash);
         if (!isPasswordValid) {
             return {
@@ -42,11 +44,17 @@ export async function handler(event) {
                 body: JSON.stringify({ message: 'Invalid email or password' }),
             };
         }
+        console.log(JWT_SECRET);  // Before both signing and verifying the token
 
-        // Successful login
+
+        // Generate a token (JWT) with userId and username
+        const token = jwt.sign({ userId: user.user_id, username: user.username }, JWT_SECRET, {
+            expiresIn: '7d',
+        });
+
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'Login successful' }),
+            body: JSON.stringify({ message: 'Login successful', token }),
         };
     } catch (error) {
         console.error('Error during login:', error);

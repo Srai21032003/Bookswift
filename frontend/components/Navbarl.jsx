@@ -5,8 +5,38 @@ import './Navbar.css';
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false); // State for profile dropdown
+  const [username, setUsername] = useState('Name'); // State to store the username
   const dropdownRef = useRef(null); // Ref to track dropdown for outside clicks
   const navigate = useNavigate();
+
+  // Fetch the username when the component mounts
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken'); // Ensure to retrieve the token
+      console.log('Token:', token);
+      if (token) {
+        try {
+          const response = await fetch('/.netlify/functions/getUser', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`, // Send token in Authorization header
+            },
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            setUsername(data.username); // Set the username in state
+          } else {
+            console.error(data.message);
+          }
+        } catch (error) {
+          console.error('Error fetching user:', error);
+        }
+      }
+    };
+
+    fetchUser(); // Call the fetchUser function
+  }, []);
 
   // Search function
   const handleSearch = async (event) => {
@@ -27,7 +57,7 @@ const Navbar = () => {
   const handleSignupClick = () => {
     navigate('/options'); // Redirect to the options page
   };
-  
+
   const handleCartClick = () => {
     navigate('/cart'); // Redirect to the cart page
   };
@@ -38,8 +68,15 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    console.log('Logout Clicked');
-    setIsProfileDropdownOpen(false); // Close the dropdown after clicking
+    // Remove the token from localStorage
+    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
+
+    // Redirect to the homepage
+    navigate('/');
+
+    // Optionally, reload the page to ensure the state is rechecked
+    window.location.reload();
   };
 
   // Close dropdown when clicking outside
@@ -60,8 +97,8 @@ const Navbar = () => {
   }, [dropdownRef]);
 
   return (
-      <nav className="navbar">
-          <img src="/assets/logo.png" alt="" className='logo'/>
+    <nav className="navbar">
+      <img src="/assets/logo.png" alt="" className='logo' />
       <ul className="nav-links">
         <li className="nav-item">Home</li>
         <li className="nav-item">About</li>
@@ -99,8 +136,8 @@ const Navbar = () => {
 
           {/* Profile Dropdown */}
           {isProfileDropdownOpen && (
-                      <div className="profile-dropdown" ref={dropdownRef}>
-                       <h4 className='dropdown-item' id='profile-name'> Name </h4>
+            <div className="profile-dropdown" ref={dropdownRef}>
+              <h4 className='dropdown-item5' id='profile-name'>{username}</h4>
               <button onClick={handleEditProfile} className="dropdown-item">Edit Profile</button>
               <button onClick={handleLogout} className="dropdown-item">Logout</button>
             </div>
