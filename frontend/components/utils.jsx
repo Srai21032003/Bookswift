@@ -15,4 +15,7 @@ export function handleExplore(navigate){
   navigate('/explore')
 }
 
+export function handleAbout(navigate){
+  navigate('/about')
+}
   
