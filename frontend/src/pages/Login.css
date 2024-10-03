@@ -137,3 +137,6 @@ h2 {
 .signup a:hover {
     text-decoration: underline;
 }
+.logo img:hover {
+    cursor: pointer;
+}
