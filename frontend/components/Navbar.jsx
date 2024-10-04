@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook for navigation
 import './Navbar.css';
+import { handleAbout, handleExplore,handleHome } from './utils';
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
@@ -22,13 +23,13 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <img src="/assets/logo.png" alt="" className='logo'/>
+      <img src="/assets/logo.png" alt="" className='logo' onClick={() => handleHome(navigate)}/>
       <ul className="nav-links">
       
-        <li className="nav-item">Home</li>
-        <li className="nav-item">About</li>
+        <li className="nav-item" onClick={() => handleHome(navigate)}>Home</li>
+        <li className="nav-item" onClick={() => handleAbout(navigate)}>About</li>
         <li className="nav-item">Features</li>
-        <li className="nav-item">Store</li>
+        <li className="nav-item" onClick={() => handleExplore(navigate)}>Store</li>
       </ul>
 
       <div className="search-signup">

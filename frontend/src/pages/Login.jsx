@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import { handleRegister } from '../../components/utils';
+import { handleHome, handleRegister } from '../../components/utils';
 
 function Login() {
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ function Login() {
     return (
         <div className="login-container">
             <div className="logo">
-                <img src="/assets/logo.png" alt="Book Swift" width="200" />
+                <img  src="/assets/logo.png" alt="Book Swift" width="200" onClick={() => handleHome(navigate)}/>
             </div>
             <h2>LOGIN</h2>
             <form id="loginForm" onSubmit={handleSubmit}>
