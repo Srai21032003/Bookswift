@@ -1,0 +1,21 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Raipur",
+			"country": {
+				"code": "IN",
+				"name": "India"
+			},
+			"subdivision": {
+				"code": "CG",
+				"name": "Chhattisgarh"
+			},
+			"timezone": "Asia/Kolkata",
+			"latitude": 21.2339,
+			"longitude": 81.6328,
+			"postalCode": "492013"
+		},
+		"timestamp": 1727889369237
+	},
+	"siteId": "bf0ef861-e28a-4170-92ff-3606b665923d"
+}
