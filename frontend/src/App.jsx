@@ -27,7 +27,9 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import Register from './pages/Signup';  // Import Register Component
 import Options from '../components/Options';  // Import Options Component
 import Cart from './pages/Cart';
-import Test from './pages/HomePagel'
+import Test from './pages/HomePagel';
+import Inventory from './pages/Inventory';
+import Inventoryvisit from './pages/Inventoryvisit';
 
 function App() {
   const [data, setData] = useState(null)
@@ -52,6 +54,8 @@ function App() {
         <Route path="/options" element={<Options />} />
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/test" element={<Test />}></Route>
+        <Route path="/inventory" element={<Inventory />}></Route>
+        <Route path="/inventory-visit" element={<Inventoryvisit />}></Route>
       </Routes>
     </Router>
   );
