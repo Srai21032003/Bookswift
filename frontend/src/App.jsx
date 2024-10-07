@@ -11,6 +11,7 @@ import Options from '../components/Options';  // Import Options Component
 import Cart from './pages/Cart';
 import About from './pages/about';
 import { CartProvider } from './contexts/cartContext.jsx';
+import InventoryForm from '../components/InventoryForm.jsx'
 
 function App() {
   const [data, setData] = useState(null)
@@ -36,6 +37,7 @@ function App() {
         <Route path="/options" element={<Options />} />
         <Route path="/cart" element={<Cart />}></Route>
         <Route path='/about' element={<About/>}></Route>
+        <Route path='/add-to-shop' element={<InventoryForm/>}></Route>
       </Routes>
     </Router>
     </CartProvider>
