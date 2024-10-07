@@ -82,13 +82,13 @@ body {
 .team-member {
 
     background-color: rgba(144, 119, 175, 1);
-    border: 2px solid #f5a4b5;
+    /*border: 2px solid #f5a4b5;*/
     /* Pink border */
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     padding: 20px;
     width: 300px;
     text-align: center;
-    margin: 10px;
+    /*margin: 10px;*/
     transition: transform 0.3s ease;
 }
 
@@ -197,7 +197,7 @@ body {
     font-size: 1rem;
     font-weight: 300;
 }
-
+/*
 .wave {
     position: absolute;
     top: -100px;
@@ -255,7 +255,7 @@ body {
         background-positon-x: 0px;
     }
 }
-
+*/
 .team-container {
     position: relative;
     width: 100vw;
@@ -270,15 +270,15 @@ body {
     position: absolute;
     left: 0%;
     top: 0%;
-    animation: primary 5s linear infinite;
+    animation: primary 20s linear infinite;
 }
 
 .primary {
-    animation: primary 5s linear infinite;
+    animation: primary 20s linear infinite;
 }
 
 .secondary {
-    animation: secondary 5s linear infinite;
+    animation: secondary 20s linear infinite;
 }
 
 @keyframes primary {

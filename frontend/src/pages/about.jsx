@@ -117,7 +117,7 @@ const About = () => {
    
   <img 
     src="/assets/logo.png" 
-    style={{ height: '4em', width: '12em', marginRight: '5px' }} 
+    style={{ height: '4em', width: '15em', marginRight: '5px' }} 
     alt="BookSwift Logo" 
   />&copy;
   2024 BookSwift | All Rights Reserved
