@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import './about.css';
+import Navbar from '../../components/Navbar';
+import Navbarl from '../../components/Navbarl';
 
 const About = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if the token exists in either localStorage or sessionStorage
+    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+    setIsLoggedIn(!!token); // Set true if token exists, false otherwise
+  }, []);
   return (
       <div>
+        {isLoggedIn ? <Navbarl /> : <Navbar />}
           <div className="blank"></div>
       <div className="banner">
         <h1>ABOUT US</h1>
