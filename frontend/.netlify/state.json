@@ -1,21 +1,21 @@
 {
 	"geolocation": {
 		"data": {
-			"city": "Raipur",
+			"city": "Indore",
 			"country": {
 				"code": "IN",
 				"name": "India"
 			},
 			"subdivision": {
-				"code": "CG",
-				"name": "Chhattisgarh"
+				"code": "MP",
+				"name": "Madhya Pradesh"
 			},
 			"timezone": "Asia/Kolkata",
-			"latitude": 21.2339,
-			"longitude": 81.6328,
-			"postalCode": "492013"
+			"latitude": 22.717,
+			"longitude": 75.8337,
+			"postalCode": "452001"
 		},
-		"timestamp": 1727889369237
+		"timestamp": 1728318156073
 	},
 	"siteId": "bf0ef861-e28a-4170-92ff-3606b665923d"
 }

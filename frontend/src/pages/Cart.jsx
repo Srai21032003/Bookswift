@@ -1,68 +1,164 @@
-import React from 'react';
-import './Cart.css'; // Make sure to create this CSS file
+// import React, { useState, useEffect } from 'react';
+// import { useCart } from '../contexts/cartContext';
+// import './Cart.css';
+
+// const Cart = () => {
+//   const { cart, removeFromCart } = useCart();
+//   const [itemDetails, setItemDetails] = useState({});
+
+//   useEffect(() => {
+//     const fetchInventoryDetails = async () => {
+//       const response = await fetch('/.netlify/functions/getInventoryDetails', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ bookIds: cart.map(item => item.book_id) }),
+//       });
+//       const data = await response.json();
+//       setItemDetails(data);
+//     };
+//     fetchInventoryDetails();
+//   }, [cart]);
+
+//   const handleQuantityChange = (bookId, delta) => {
+//     setItemDetails(prevDetails => {
+//       const currentQuantity = prevDetails[bookId]?.quantity || 1;
+//       const newQuantity = Math.min(
+//         Math.max(currentQuantity + delta, 1),
+//         prevDetails[bookId]?.availableQuantity
+//       );
+//       return {
+//         ...prevDetails,
+//         [bookId]: { ...prevDetails[bookId], quantity: newQuantity },
+//       };
+//     });
+//   };
+
+//   const totalPrice = cart.reduce((acc, item) => {
+//     const itemPrice = itemDetails[item.book_id]?.price || 0;
+//     const itemQuantity = itemDetails[item.book_id]?.quantity || 1;
+//     return acc + itemPrice * itemQuantity;
+//   }, 0).toFixed(2);
+
+//   return (
+//     <div className="cart-container">
+//       <h1>Your Shopping Cart</h1>
+//       <div className="cart-items">
+//         {cart.map((item) => (
+//           <div className="cart-item" key={item.book_id}>
+//             <div className="wrapper">
+//               <div className="book">
+//                 <div className="book__cover" style={{ backgroundImage: `url(${item.cover_img_url || '/assets/default-cover.png'})` }} />
+//                 <div className="book__page"></div>
+//               </div>
+//             </div>
+//             <div className="item-details">
+//               <h3 className="item-title">{item.title}</h3>
+//               <p className="item-price">${(itemDetails[item.book_id]?.price || 0).toFixed(2)}</p>
+//               <div className="quantity-controls">
+//                 <button onClick={() => handleQuantityChange(item.book_id, -1)}>-</button>
+//                 <span>{itemDetails[item.book_id]?.quantity || 1}</span>
+//                 <button onClick={() => handleQuantityChange(item.book_id, 1)}>+</button>
+//               </div>
+//               {/* Remove Button */}
+//               <button 
+//                 className="remove-btn" 
+//                 onClick={() => removeFromCart(item.book_id)}>
+//                 Remove
+//               </button>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//       <div className="total">
+//         <h2>Total: ${totalPrice}</h2>
+//         <button className="checkout-btn">Proceed to Checkout</button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Cart;
+import React, { useState, useEffect } from 'react';
+import { useCart } from '../contexts/cartContext';
+import './Cart.css';
 
 const Cart = () => {
-    const cartItems = [
-        {
-            id: 1,
-            title: 'Book Title 1',
-            availability: 'In Stock',
-            price: 19.99,
-            image: '../assets/c1.png',
+  const { cart, removeFromCart } = useCart(); // Destructure removeFromCart from context
+  const [itemDetails, setItemDetails] = useState({});
+
+  useEffect(() => {
+    const fetchInventoryDetails = async () => {
+      const response = await fetch('/.netlify/functions/getInventoryDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        {
-            id: 2,
-            title: 'Book Title 2',
-            availability: 'Out of Stock',
-            price: 15.99,
-            image: '../assets/c2.png',
-        },
-        {
-            id: 3,
-            title: 'Book Title 3',
-            availability: 'Out of Stock',
-            price: 15.99,
-            image: '../assets/c3.png',
-        },
-    ];
+        body: JSON.stringify({ bookIds: cart.map(item => item.book_id) }),
+      });
+      const data = await response.json();
+      setItemDetails(data);
+    };
+    fetchInventoryDetails();
+  }, [cart]);
 
-    const handleShowDetails = (title) => {
-        alert('Showing details for the book: ${title}');
-    }
+  const handleQuantityChange = (bookId, delta) => {
+    setItemDetails(prevDetails => {
+      const currentQuantity = prevDetails[bookId].quantity || 1;
+      const newQuantity = Math.min(
+        Math.max(currentQuantity + delta, 1),
+        prevDetails[bookId].availableQuantity
+      );
+      return {
+        ...prevDetails,
+        [bookId]: { ...prevDetails[bookId], quantity: newQuantity },
+      };
+    });
+  };
 
-    const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+  const totalPrice = cart.reduce((acc, item) => {
+    const itemPrice = itemDetails[item.book_id]?.price || 0;
+    const itemQuantity = itemDetails[item.book_id]?.quantity || 1;
+    return acc + itemPrice * itemQuantity;
+  }, 0).toFixed(2);
 
-    return (
-        <div className="cart-container">
-            <h1>Your Shopping Cart</h1>
-            <div className="cart-items">
-                {cartItems.map((item) => (
-                    <div className="cart-item" key={item.id}>
-                        <div class="wrapper">
-          <div class="book">
-          <div className="book__cover" style={{ backgroundImage: `url(${item.image})` }}>
-
+  return (
+    <div className="cart-container">
+      <h1>Your Shopping Cart</h1>
+      <div className="cart-items">
+        {cart.length === 0 ? (
+          <p>No items in cart.</p>
+        ) : (
+          cart.map((item) => (
+            <div className="cart-item" key={item.book_id}>
+              <div className="wrapper">
+                <div className="book">
+                  <div className="book__cover" style={{ backgroundImage: `url(${item.cover_img_url || '/assets/default-cover.png'})` }}>
+                  </div>
+                  <div className="book__page"></div>
+                </div>
+              </div>
+              <div className="item-details">
+                <h3 className="item-title">{item.title}</h3>
+                <p className="item-price">${(itemDetails[item.book_id]?.price || 0).toFixed(2)}</p>
+                <div className="quantity-controls">
+                  <button onClick={() => handleQuantityChange(item.book_id, -1)}>-</button>
+                  <span>{itemDetails[item.book_id]?.quantity || 1}</span>
+                  <button onClick={() => handleQuantityChange(item.book_id, 1)}>+</button>
+                </div>
+                <button onClick={() => removeFromCart(item.book_id)}>Remove</button> {/* Add Remove button */}
+              </div>
             </div>
-            <div class="book__page"></div>
-         </div>
-                            </div>
-                        <div className="item-details">
-                            <h3 className="item-title">{item.title}</h3>
-                            <p className="item-availability">Availability: {item.availability}</p>
-                            <p className="item-price">${item.price.toFixed(2)}</p>
-                            <button className="show-me-btn" onClick={() => handleShowDetails(item.title)}>
-                                Show Me
-                            </button>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className="total">
-                <h2>Total: ${totalPrice}</h2>
-                <button className="checkout-btn">Proceed to Checkout</button>
-            </div>
-        </div>
-    );
+          ))
+        )}
+      </div>
+      <div className="total">
+        <h2>Total: ${totalPrice}</h2>
+        <button className="checkout-btn">Proceed to Checkout</button>
+      </div>
+    </div>
+  );
 };
 
 export default Cart;

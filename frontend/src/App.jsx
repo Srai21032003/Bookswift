@@ -1,21 +1,3 @@
-{/*import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import HomePage from './pages/HomePage';
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <HomePage />
-    </div>
-  )
-}
-
-export default App
-*/}
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ExplorePage from '../components/Explore';
@@ -28,6 +10,7 @@ import Register from './pages/Signup';  // Import Register Component
 import Options from '../components/Options';  // Import Options Component
 import Cart from './pages/Cart';
 import About from './pages/about';
+import { CartProvider } from './contexts/cartContext.jsx';
 
 function App() {
   const [data, setData] = useState(null)
@@ -41,6 +24,7 @@ function App() {
     .catch(err => console.log(err))
   },[])
   return (
+    <CartProvider>
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -54,6 +38,7 @@ function App() {
         <Route path='/about' element={<About/>}></Route>
       </Routes>
     </Router>
+    </CartProvider>
   );
 }
 

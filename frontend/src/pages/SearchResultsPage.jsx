@@ -60,6 +60,7 @@ const SearchResultsPage = () => {
                 <div className="author">by {book.author}</div>
                 <div className="body">
                   <p>{book.description || 'No description available.'}</p>
+                  <button><i class="fa fa-shopping-cart"></i> Add to cart</button>
                 </div>
               </div>
             </div>
