@@ -49,6 +49,9 @@ const Navbar = () => {
       navigate(`/search-results?query=${encodeURIComponent(searchQuery)}`);
     }
   };
+  const handleAbout = () => {
+    navigate('/about'); // Redirect to the about page
+  };
 
   // Toggle profile dropdown
   const toggleProfileDropdown = () => {
@@ -102,7 +105,7 @@ const Navbar = () => {
       <img src="/assets/logo.png" alt="" className='logo' onClick={() => handleHome(navigate)}/>
       <ul className="nav-links">
         <li className="nav-item" onClick={() => handleHome(navigate)}>Home</li>
-        <li className="nav-item">About</li>
+        <li className="nav-item" onClick={() => handleAbout(navigate)}>About</li>
         <li className="nav-item">Features</li>
         <li className="nav-item" onClick={() => handleExplore(navigate)}>Store</li>
       </ul>

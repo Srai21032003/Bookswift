@@ -20,6 +20,9 @@ const Navbar = () => {
   const handleSignupClick = () => {
     navigate('/options'); // Redirect to the options page
   };
+  const handleAbout = () => {
+    navigate('/about'); // Redirect to the about page
+  };
 
   return (
     <nav className="navbar">
