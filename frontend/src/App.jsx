@@ -13,6 +13,10 @@ import About from './pages/about';
 import { CartProvider } from './contexts/cartContext.jsx';
 import InventoryForm from '../components/InventoryForm.jsx';
 import BookInfo from '../components/BookInfo.jsx'; // Correct import
+import Profile from '../src/pages/Profile.jsx'
+import Tracking from '../src/pages/Tracking.jsx'
+import Book from '../src/pages/Book.jsx'
+
 
 function App() {
   const [data, setData] = useState(null);
@@ -43,6 +47,9 @@ function App() {
           <Route path="/add-to-shop" element={<InventoryForm />} />
           {/* Correct path for book detail page */}
           <Route path="/book/:book_id" element={<BookInfo />} />
+          <Route path='/profile' element={<Profile />}></Route>
+          <Route path='/tracking' element={<Tracking />}></Route>
+          <Route path='/book' element={<Book/>}></Route>
         </Routes>
       </Router>
     </CartProvider>
