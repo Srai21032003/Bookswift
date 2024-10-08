@@ -44,17 +44,15 @@ export async function handler(event) {
                 body: JSON.stringify({ message: 'Invalid email or password' }),
             };
         }
-        console.log(JWT_SECRET);  // Before both signing and verifying the token
-
-
+        
         // Generate a token (JWT) with userId and username
-        const token = jwt.sign({ userId: user.user_id, username: user.username }, JWT_SECRET, {
+        const token = jwt.sign({ userId: user.user_id, username: user.username, userType: user.type }, JWT_SECRET, {
             expiresIn: '7d',
         });
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'Login successful', token }),
+            body: JSON.stringify({ message: 'Login successful', token, userType: user.type }), // Include userType here
         };
     } catch (error) {
         console.error('Error during login:', error);

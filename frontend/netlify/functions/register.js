@@ -6,6 +6,11 @@ function generateUserId() {
   return 'user_' + Math.random().toString(36).substr(2, 9);
 }
 
+// Helper function to generate a unique bookstore ID
+function generateBookstoreId() {
+  return 'bks_' + Math.random().toString(36).substr(2, 9);
+}
+
 export async function handler(event) {
   if (event.httpMethod !== 'POST') {
     return {
@@ -14,7 +19,7 @@ export async function handler(event) {
     };
   }
 
-  const { name, email, password, phone, userType } = JSON.parse(event.body);
+  const { name, email, password, phone, userType, storeName, address } = JSON.parse(event.body);
 
   if (!name || !email || !password || !phone || !userType) {
     return {
@@ -29,6 +34,7 @@ export async function handler(event) {
     // Start a transaction
     await sql('BEGIN');
 
+    // Check if the username or email already exists in the Users table
     const checkUserQuery = `
       SELECT * FROM Users WHERE username = $1 OR email = $2
     `;
@@ -52,33 +58,46 @@ export async function handler(event) {
       };
     }
 
-    // Generate a unique user ID
-    const userId = generateUserId();
-
     // Hash the password
     const passwordHash = await bcrypt.hash(password, 10); // 10 is the salt rounds, higher means more secure but slower
 
-    // Insert into Users table
-    const insertUserQuery = `
-      INSERT INTO Users (user_id, username, email, password_hash, type)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING user_id
-    `;
-    await sql(insertUserQuery, [userId, name, email, passwordHash, userType]);
+    let userId;
 
-    // Insert into Customer or Admin table based on userType
     if (userType.toLowerCase() === 'customer') {
+      // For customers, generate a user ID
+      userId = generateUserId();
+
+      // Insert into Users table
+      const insertUserQuery = `
+        INSERT INTO Users (user_id, username, email, password_hash, type)
+        VALUES ($1, $2, $3, $4, $5)
+      `;
+      await sql(insertUserQuery, [userId, name, email, passwordHash, userType]);
+
+      // Insert into Customer table
       const insertCustomerQuery = `
         INSERT INTO Customer (cust_id, contact_no, firstname, lastname, address)
         VALUES ($1, $2, $3, $4, $5)
       `;
       await sql(insertCustomerQuery, [userId, phone, name, '', '']);
-    } else if (userType.toLowerCase() === 'admin') {
-      const insertAdminQuery = `
-        INSERT INTO Admin (admin_id, role, permissions, last_login)
-        VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
+    } else if (userType.toLowerCase() === 'bookowner') {
+      // For bookowners, generate a bookstore ID and use it as the user ID and bookstore ID
+      const bookstoreId = generateBookstoreId();
+      userId = bookstoreId; // Use bookstoreId as userId
+
+      // Insert into Users table
+      const insertUserQuery = `
+        INSERT INTO Users (user_id, username, email, password_hash, type)
+        VALUES ($1, $2, $3, $4, $5)
       `;
-      await sql(insertAdminQuery, [userId, 'default_role', 'default_permissions']);
+      await sql(insertUserQuery, [userId, name, email, passwordHash, userType]);
+
+      // Insert into Bookstore table
+      const insertBookstoreQuery = `
+        INSERT INTO Bookstore (bks_id, store_name, contact_no, store_address)
+        VALUES ($1, $2, $3, $4)
+      `;
+      await sql(insertBookstoreQuery, [userId, storeName, phone, address]);
     }
 
     // Commit the transaction

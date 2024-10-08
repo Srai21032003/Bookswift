@@ -1,10 +1,43 @@
-import React, { useState } from 'react';
-import './InventoryForm.css';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './InventoryForm.css';
+import Navbar from './Navbar';
+import Navbarl from './Navbarl';
 
 function InventoryForm() {
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [inventory, setInventory] = useState([]); // State for inventory
     const [price, setPrice] = useState('');
+    const [shopId, setShopId] = useState('');
+
+    useEffect(() => {
+        // Check if the token exists in either localStorage or sessionStorage
+        const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+        if (token) {
+            setIsLoggedIn(true);
+            const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode the JWT to get the payload
+            setShopId(decodedToken.userId); // Using userId as shop_id
+            // console.log(decodedToken.userId);
+            fetchInventory(decodedToken.userId); // Fetch the inventory using userId
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, []);
+
+    const fetchInventory = async (shopId) => {
+        try {
+            const response = await fetch(`/.netlify/functions/getInventory?shop_id=${shopId}`);
+            if (response.ok) {
+                const data = await response.json();
+                setInventory(data); // Set the inventory state with fetched data
+            } else {
+                window.alert('Failed to fetch inventory');
+            }
+        } catch (error) {
+            window.alert(`An error occurred: ${error.message}`);
+        }
+    };
 
     const handleInventoryRedirect = () => {
         navigate('/Inventory-visit');
@@ -27,11 +60,12 @@ function InventoryForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ bookName, authorName, price, quantity, genre, publisher, description, img_url }),
+                body: JSON.stringify({ shopId, bookName, authorName, price, quantity, genre, publisher, description, img_url }),
             });
 
             if (response.ok) {
-                navigate('/success');
+                // navigate('/success');
+                window.alert("Book Added Successfully");
             } else {
                 const errorData = await response.json();
                 window.alert(errorData.message);
@@ -43,27 +77,25 @@ function InventoryForm() {
 
     return (
         <div className="form-layout">
+            {isLoggedIn ? <Navbarl /> : <Navbar />}
             <div className="inventory-container">
-             <h2>Your inventory</h2>
-                           <div className="inventory">
-                            <div className="book1">
-                                <div className="book-image" style={{ backgroundImage: `url('../assets/c1.png')` }}></div>
-                          <div className="details">
-                           <p>Book Title 1</p>
-                           <p>$19.99</p> 
-                           <p>2</p>
-                           </div>
+                <h2>Your Inventory</h2>
+                <div className="inventory">
+                    {inventory.length > 0 ? (
+                        inventory.map((book) => (
+                            <div className="book1" key={book.inventory_id}>
+                                <div className="book-image" style={{ backgroundImage: `url('${book.img_url}')` }}></div>
+                                <div className="details">
+                                    <p>{book.book_name}</p>
+                                    <p>${parseFloat(book.price).toFixed(2)}</p>
+                                    <p>{book.quantity}</p>
+                                </div>
                             </div>
-                            <div className="book1">
-                                <div className="book-image" style={{ backgroundImage: `url('../assets/c1.png')` }}></div>
-                          <div className="details">
-                          <p>Book Title 1</p>
-                           <p>$19.99</p> 
-                           <p>2</p>
-                            </div>
-                            </div>
-                            </div>
-    
+                        ))
+                    ) : (
+                        <p>No books in your inventory.</p>
+                    )}
+                </div>
             </div>
 
             <div className="register-container">
@@ -113,9 +145,6 @@ function InventoryForm() {
                     </div>
                     <button type="submit" className="btn-register">ADD BOOK</button>
                 </form>
-                {/* <div className="already-added">
-                    Go to your inventory <a href="#" onClick={handleInventoryRedirect}>Go to</a>
-                </div> */}
             </div>
         </div>
     );

@@ -12,6 +12,12 @@ body {
     align-items: center;
     height: 100vh;
 }
+/* Add this section to InventoryForm.css */
+.navbar-container {
+    margin-bottom: 20px; /* Space between the navbar and the form layout */
+}
+
+/* Keep the rest of your existing CSS styles here */
 
 .form-layout {
     display: flex;

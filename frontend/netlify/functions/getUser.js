@@ -17,7 +17,8 @@ export async function handler(event) {
 
     try {
         const sql = neon(process.env.DATABASE_URL);
-        const query = 'SELECT username FROM Users WHERE user_id = $1'; // Adjust according to your table structure
+        // Select both username and userType (type) from the Users table
+        const query = 'SELECT username, type FROM Users WHERE user_id = $1';
         const result = await sql(query, [userId]);
 
         if (result.length === 0) {
@@ -28,9 +29,10 @@ export async function handler(event) {
             };
         }
 
+        // Return both username and userType
         return {
             statusCode: 200,
-            body: JSON.stringify({ username: result[0].username }),
+            body: JSON.stringify({ username: result[0].username, userType: result[0].type }),
         };
     } catch (error) {
         console.error('Error fetching user data:', error); // Log any errors during DB fetch

@@ -11378,13 +11378,13 @@ async function handler(event) {
         body: JSON.stringify({ message: "Invalid email or password" })
       };
     }
-    console.log(JWT_SECRET);
-    const token = import_jsonwebtoken.default.sign({ userId: user.user_id, username: user.username }, JWT_SECRET, {
+    const token = import_jsonwebtoken.default.sign({ userId: user.user_id, username: user.username, userType: user.type }, JWT_SECRET, {
       expiresIn: "7d"
     });
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: "Login successful", token })
+      body: JSON.stringify({ message: "Login successful", token, userType: user.type })
+      // Include userType here
     };
   } catch (error) {
     console.error("Error during login:", error);
