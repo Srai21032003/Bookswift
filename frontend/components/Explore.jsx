@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useCart } from '../src/contexts/cartContext'; // Import useCart hook
+import { useNavigate } from 'react-router-dom'; // useNavigate instead of useHistory
+import { useCart } from '../src/contexts/cartContext';
 import './Explore.css';
 
 const Explore = () => {
-  const { addToCart } = useCart(); // Destructure addToCart from context
+  const { addToCart } = useCart();
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate(); // useNavigate for navigation
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -24,17 +26,13 @@ const Explore = () => {
     fetchBooks();
   }, []);
 
+  const handleBookClick = (bookId) => {
+    navigate(`/book/${bookId}`); // Navigate to book detail page
+  };
+
   return (
     <div className="explore">
-      <div className="blank"></div>
       <h1>OUR BOOKS CATALOG</h1>
-      <div className="category-menu">
-        <button>All</button>
-        <button>Fiction</button>
-        <button>Non-Fiction</button>
-        <button>Wellness</button>
-        <button>Kids books</button>
-      </div>
       <div className="book1s-grid">
         {books.length === 0 ? (
           <p>No books found.</p>
@@ -47,22 +45,19 @@ const Explore = () => {
                   src={book.cover_img_url || '/assets/default-cover.png'}
                   alt={book.title}
                 />
-                <img
-                  className="book1-side"
-                  src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg"
-                  alt="book-side"
-                />
               </div>
               <div className="preface">
                 <div className="header">
-                  <div className="title">{book.title}</div>
-                  <div className="icon">
-                    <i className="fas fa-chevron-down"></i>
+                  <div
+                    className="title"
+                    onClick={() => handleBookClick(book.book_id)}
+                  >
+                    {book.title}
                   </div>
                 </div>
                 <div className="author">by {book.author}</div>
                 <div className="body">
-                  <p>{book.description ? book.description.slice(0, 100) : 'No description available.'}...</p>
+                  <p>{book.description.slice(0, 100)}...</p>
                   <button onClick={() => addToCart(book)}>
                     <i className="fa fa-shopping-cart"></i> Add to cart
                   </button>
