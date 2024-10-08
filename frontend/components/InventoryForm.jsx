@@ -87,7 +87,7 @@ function InventoryForm() {
                                 <div className="book-image" style={{ backgroundImage: `url('${book.img_url}')` }}></div>
                                 <div className="details">
                                     <p>{book.book_name}</p>
-                                    <p>${parseFloat(book.price).toFixed(2)}</p>
+                                    <p>₹{parseFloat(book.price).toFixed(2)}</p>
                                     <p>{book.quantity}</p>
                                 </div>
                             </div>
