@@ -9553,7 +9553,7 @@ async function handler(event) {
   const { userId } = tokenVerification.decoded;
   try {
     const sql = Ys(process.env.DATABASE_URL);
-    const query = "SELECT username FROM Users WHERE user_id = $1";
+    const query = "SELECT username, type FROM Users WHERE user_id = $1";
     const result = await sql(query, [userId]);
     if (result.length === 0) {
       console.error("User not found for userId:", userId);
@@ -9564,7 +9564,7 @@ async function handler(event) {
     }
     return {
       statusCode: 200,
-      body: JSON.stringify({ username: result[0].username })
+      body: JSON.stringify({ username: result[0].username, userType: result[0].type })
     };
   } catch (error) {
     console.error("Error fetching user data:", error);

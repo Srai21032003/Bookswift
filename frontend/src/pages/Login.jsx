@@ -40,7 +40,12 @@ function Login() {
                     sessionStorage.setItem('authToken', data.token);
                 }
 
-                navigate('/'); // Redirect to the home page
+                // Check the user type and navigate accordingly
+                if (data.userType === 'bookowner') {
+                    navigate('/add-to-shop'); // Redirect bookstore owners to '/add-to-shop'
+                } else {
+                    navigate('/'); // Redirect customers to the home page
+                }
             } else {
                 alert(data.message || 'Invalid email or password!');
             }
@@ -53,7 +58,7 @@ function Login() {
     return (
         <div className="login-container">
             <div className="logo">
-                <img  src="/assets/logo.png" alt="Book Swift" width="200" onClick={() => handleHome(navigate)}/>
+                <img src="/assets/logo.png" alt="Book Swift" width="200" onClick={() => handleHome(navigate)} />
             </div>
             <h2>LOGIN</h2>
             <form id="loginForm" onSubmit={handleSubmit}>

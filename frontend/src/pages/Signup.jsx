@@ -32,6 +32,7 @@ function Signup() {
             });
 
             if (response.ok) {
+                window.alert('Registered Successfully');
                 navigate('/success');
             } else if (response.status === 409) {
                 const errorData = await response.json();

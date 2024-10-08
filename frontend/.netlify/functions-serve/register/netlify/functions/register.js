@@ -7586,6 +7586,9 @@ var import_bcryptjs = __toESM(require_bcryptjs(), 1);
 function generateUserId() {
   return "user_" + Math.random().toString(36).substr(2, 9);
 }
+function generateBookstoreId() {
+  return "bks_" + Math.random().toString(36).substr(2, 9);
+}
 async function handler(event) {
   if (event.httpMethod !== "POST") {
     return {
@@ -7593,7 +7596,7 @@ async function handler(event) {
       body: JSON.stringify({ message: "Method Not Allowed" })
     };
   }
-  const { name, email, password, phone, userType } = JSON.parse(event.body);
+  const { name, email, password, phone, userType, storeName, address } = JSON.parse(event.body);
   if (!name || !email || !password || !phone || !userType) {
     return {
       statusCode: 400,
@@ -7622,26 +7625,33 @@ async function handler(event) {
         })
       };
     }
-    const userId = generateUserId();
     const passwordHash = await import_bcryptjs.default.hash(password, 10);
-    const insertUserQuery = `
-      INSERT INTO Users (user_id, username, email, password_hash, type)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING user_id
-    `;
-    await sql(insertUserQuery, [userId, name, email, passwordHash, userType]);
+    let userId;
     if (userType.toLowerCase() === "customer") {
+      userId = generateUserId();
+      const insertUserQuery = `
+        INSERT INTO Users (user_id, username, email, password_hash, type)
+        VALUES ($1, $2, $3, $4, $5)
+      `;
+      await sql(insertUserQuery, [userId, name, email, passwordHash, userType]);
       const insertCustomerQuery = `
         INSERT INTO Customer (cust_id, contact_no, firstname, lastname, address)
         VALUES ($1, $2, $3, $4, $5)
       `;
       await sql(insertCustomerQuery, [userId, phone, name, "", ""]);
-    } else if (userType.toLowerCase() === "admin") {
-      const insertAdminQuery = `
-        INSERT INTO Admin (admin_id, role, permissions, last_login)
-        VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
+    } else if (userType.toLowerCase() === "bookowner") {
+      const bookstoreId = generateBookstoreId();
+      userId = bookstoreId;
+      const insertUserQuery = `
+        INSERT INTO Users (user_id, username, email, password_hash, type)
+        VALUES ($1, $2, $3, $4, $5)
       `;
-      await sql(insertAdminQuery, [userId, "default_role", "default_permissions"]);
+      await sql(insertUserQuery, [userId, name, email, passwordHash, userType]);
+      const insertBookstoreQuery = `
+        INSERT INTO Bookstore (bks_id, store_name, contact_no, store_address)
+        VALUES ($1, $2, $3, $4)
+      `;
+      await sql(insertBookstoreQuery, [userId, storeName, phone, address]);
     }
     await sql("COMMIT");
     return {
