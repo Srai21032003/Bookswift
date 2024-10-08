@@ -83,8 +83,8 @@ function InventoryForm() {
                 <div className="inventory">
                     {inventory.length > 0 ? (
                         inventory.map((book) => (
-                            <div className="book1" key={book.inventory_id}>
-                                <div className="book-image" style={{ backgroundImage: `url('${book.img_url}')` }}></div>
+                            <div className="inventory-book" key={book.inventory_id}>
+                                <div className="inventory-book-image" style={{ backgroundImage: `url('${book.img_url}')` }}></div>
                                 <div className="details">
                                     <p>{book.book_name}</p>
                                     <p>₹{parseFloat(book.price).toFixed(2)}</p>
@@ -98,7 +98,7 @@ function InventoryForm() {
                 </div>
             </div>
 
-            <div className="register-container">
+            <div className="inventory-register-container">
                 <div className="logo">
                     <img src="/assets/logo.png" alt="Book Swift" width="200" />
                 </div>
