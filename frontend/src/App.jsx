@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import About from './pages/about';
 import { CartProvider } from './contexts/cartContext.jsx';
 import InventoryForm from '../components/InventoryForm.jsx'
+import Book from '../components/Book.jsx'
 
 function App() {
   const [data, setData] = useState(null)
@@ -38,6 +39,7 @@ function App() {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path='/about' element={<About/>}></Route>
         <Route path='/add-to-shop' element={<InventoryForm/>}></Route>
+        <Route path='/book-info' element={<Book/>}></Route>
       </Routes>
     </Router>
     </CartProvider>
