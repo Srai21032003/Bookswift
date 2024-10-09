@@ -137,7 +137,10 @@ const pool = new Pool({
       password: '#Tanu40048',    // Replace with your PostgreSQL password
       port: 3128,                      // Default PostgreSQL port
     });
-
+    app.post("api/create-checkout-session",async(req,res) =>{
+        const product = req.body;
+        console.log(product);
+        } )
     app.get('/login', function (req, res) {
         res.render("login");
      });

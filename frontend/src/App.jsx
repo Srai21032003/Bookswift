@@ -30,7 +30,11 @@ import Cart from './pages/Cart';
 import Test from './pages/HomePagel';
 import Inventory from './pages/Inventory';
 import Inventoryvisit from './pages/Inventoryvisit';
-
+import Book from './pages/Book';
+import Tracking from './pages/Tracking';
+import Profile from './pages/Profile';
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
 function App() {
   const [data, setData] = useState(null)
   useEffect(() => { 
@@ -56,6 +60,11 @@ function App() {
         <Route path="/test" element={<Test />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory-visit" element={<Inventoryvisit />}></Route>
+        <Route path="/book" element={<Book />}></Route>
+        <Route path="/tracking" element={<Tracking />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/success" element={<Success />}></Route>
+        <Route path="/cancel" element={<Cancel/>}></Route>
       </Routes>
     </Router>
   );

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function InventoryForm() {
     const navigate = useNavigate();
     const [price, setPrice] = useState('');
-    
+
     const handleInventoryRedirect = () => {
         navigate('/Inventory-visit');
     };
@@ -16,6 +16,10 @@ function InventoryForm() {
         const authorName = event.target.authorName.value;
         const price = event.target.price.value;
         const quantity = event.target.quantity.value;
+        const genre = event.target.genre.value;
+        const publisher = event.target.publisher.value;
+        const description = event.target.description.value;
+        const img_url = event.target.img_url.value;
 
         try {
             const response = await fetch('/.netlify/functions/addBook', {
@@ -23,7 +27,7 @@ function InventoryForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ bookName, authorName, price, quantity }),
+                body: JSON.stringify({ bookName, authorName, price, quantity, genre, publisher, description, img_url }),
             });
 
             if (response.ok) {
@@ -39,14 +43,29 @@ function InventoryForm() {
 
     return (
         <div className="form-layout">
-            <div className="text-content">
-                <div className="top">Get your shop online</div>
-                <div className="head">EASE YOUR <br /> FEATURED &<br /> SHIPPING</div>
-                <div className="sub-description">
-                    Millions of books are offered for sale online by bookstores and booksellers on BOOK SWIFT.
-                </div>
-                <div className="learn-more">learn more about our terms and policy <a href="#">more</a></div>
+            <div className="inventory-container">
+             <h2>Your inventory</h2>
+                           <div className="inventory">
+                            <div className="book1">
+                                <div className="book-image" style={{ backgroundImage: `url('../assets/c1.png')` }}></div>
+                          <div className="details">
+                           <p>Book Title 1</p>
+                           <p>$19.99</p> 
+                           <p>2</p>
+                           </div>
+                            </div>
+                            <div className="book1">
+                                <div className="book-image" style={{ backgroundImage: `url('../assets/c1.png')` }}></div>
+                          <div className="details">
+                          <p>Book Title 1</p>
+                           <p>$19.99</p> 
+                           <p>2</p>
+                            </div>
+                            </div>
+                            </div>
+    
             </div>
+
             <div className="register-container">
                 <div className="logo">
                     <img src="/assets/logo.png" alt="Book Swift" width="200" />
@@ -76,11 +95,27 @@ function InventoryForm() {
                         <label htmlFor="quantity">QUANTITY</label>
                         <input type="number" id="quantity" name="quantity" required />
                     </div>
+                    <div className="input-group">
+                        <label htmlFor="genre">GENRE</label>
+                        <input type="text" id="genre" name="genre" required />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="publisher">PUBLISHER</label>
+                        <input type="text" id="publisher" name="publisher" required />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="description">DESCRIPTION</label>
+                        <textarea id="description" name="description" required />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="img_url">IMAGE URL</label>
+                        <input type="text" id="img_url" name="img_url" required />
+                    </div>
                     <button type="submit" className="btn-register">ADD BOOK</button>
                 </form>
-                <div className="already-added">
+                {/* <div className="already-added">
                     Go to your inventory <a href="#" onClick={handleInventoryRedirect}>Go to</a>
-                </div>
+                </div> */}
             </div>
         </div>
     );
