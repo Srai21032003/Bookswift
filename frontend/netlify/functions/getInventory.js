@@ -18,6 +18,7 @@ exports.handler = async (event) => {
         `, [shop_id]);
 
         await client.end();
+        // console.log(res);
         return {
             statusCode: 200,
             body: JSON.stringify(res.rows),

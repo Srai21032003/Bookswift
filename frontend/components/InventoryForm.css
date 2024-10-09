@@ -19,8 +19,9 @@ body {
     justify-content: space-between;
     width: 1200px; /* Increased width for better alignment */
     height: auto;
+    /* margin-top: 20px; */
     padding: 20px;
-    margin-top: 50px; /* Reduced margin-top for better visual balance */
+    margin-top: 400px; /* Reduced margin-top for better visual balance */
 }
 
 /* Inventory Section */
@@ -29,6 +30,7 @@ body {
     background-color: #bba3cf;
     padding: 10px;
     border-radius: 15px;
+    margin-top: 80px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
