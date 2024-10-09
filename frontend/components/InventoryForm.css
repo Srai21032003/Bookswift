@@ -12,12 +12,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-/* Add this section to InventoryForm.css */
-.navbar-container {
-    margin-bottom: 20px; /* Space between the navbar and the form layout */
-}
-
-/* Keep the rest of your existing CSS styles here */
 
 .form-layout {
     display: flex;
@@ -44,7 +38,7 @@ body {
     gap: 15px; /* Added gap between book items */
 }
 
-.book1 {
+.inventory-book {
     display: flex;
     align-items: center; /* Aligns items vertically */
     height: 150px; /* Adjusted height for consistent look */
@@ -55,7 +49,7 @@ body {
     overflow: hidden;
 }
 
-.book-image {
+.inventory-book-image {
     width: 40%;
     height: 100%;
     background-size: cover;
@@ -76,7 +70,7 @@ body {
 }
 
 /* Register Form Section */
-.register-container {
+.inventory-register-container {
     width: 45%;
     background-color: #d9b8e5;
     padding: 30px;
