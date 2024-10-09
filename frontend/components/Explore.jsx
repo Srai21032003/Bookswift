@@ -6,9 +6,14 @@ import './Explore.css';
 const Explore = () => {
   const { addToCart } = useCart();
   const [books, setBooks] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate(); // useNavigate for navigation
 
   useEffect(() => {
+    // Check if the user is logged in by checking for a token in localStorage or sessionStorage
+    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists
+
     const fetchBooks = async () => {
       try {
         const response = await fetch('/.netlify/functions/fetchBooks');
@@ -28,6 +33,15 @@ const Explore = () => {
 
   const handleBookClick = (bookId) => {
     navigate(`/book/${bookId}`); // Navigate to book detail page
+  };
+
+  const handleAddToCart = (book) => {
+    if (isLoggedIn) {
+      addToCart(book); // If user is logged in, add the item to the cart
+    } else {
+      alert('Please log in to add items to your cart.'); // Prompt user to log in
+      navigate('/login'); // Navigate to login page
+    }
   };
 
   return (
@@ -58,7 +72,7 @@ const Explore = () => {
                 <div className="author">by {book.author}</div>
                 <div className="body">
                   <p>{book.description.slice(0, 100)}...</p>
-                  <button onClick={() => addToCart(book)}>
+                  <button onClick={() => handleAddToCart(book)}>
                     <i className="fa fa-shopping-cart"></i> Add to cart
                   </button>
                 </div>
