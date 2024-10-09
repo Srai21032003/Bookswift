@@ -177,7 +177,7 @@ const Cart = () => {
               </div>
               <div className="item-details">
                 <h3 className="item-title">{item.title}</h3>
-                <p className="item-price">${Number(itemDetails[item.book_id]?.price || 0).toFixed(2)}</p>
+                <p className="item-price">₹{Number(itemDetails[item.book_id]?.price || 0).toFixed(2)}</p>
                 <div className="quantity-controls">
                   <button onClick={() => handleQuantityChange(item.book_id, -1)}>-</button>
                   <span>{itemDetails[item.book_id]?.quantity || 1}</span>
@@ -191,7 +191,7 @@ const Cart = () => {
       </div>
       {cart.length > 0 && (
         <div className="total">
-          <h2>Total: ${totalPrice}</h2>
+          <h2>Total: ₹{totalPrice}</h2>
           <button className="checkout-btn">Proceed to Checkout</button>
         </div>
       )}
