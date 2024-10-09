@@ -48,11 +48,11 @@
 //   }
 // };
 
-const { Pool } = require('pg');  // Use 'pg' for HTTP connections
+const { Pool } = require('pg'); // Use 'pg' for HTTP connections
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // Use HTTP-based connection pooling
-  ssl: { rejectUnauthorized: false } // Enable SSL
+  ssl: { rejectUnauthorized: false }, // Enable SSL
 });
 
 exports.handler = async (event) => {
@@ -69,7 +69,11 @@ exports.handler = async (event) => {
     client.release();
 
     const data = result.rows.reduce((acc, row) => {
-      acc[row.book_id] = { price: row.price, availableQuantity: row.availablequantity, quantity: 1 };
+      acc[row.book_id] = {
+        price: row.price,
+        availableQuantity: row.availableQuantity, // Use the correct casing
+        quantity: 1, // Default to 1 as initial quantity
+      };
       return acc;
     }, {});
 

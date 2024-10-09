@@ -80,7 +80,6 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    // Load cart from localStorage on mount
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       setCart(JSON.parse(storedCart));
@@ -106,8 +105,8 @@ export const CartProvider = ({ children }) => {
 
       if (response.ok) {
         const updatedCart = await response.json();
-        setCart(updatedCart); // Update the cart in the context
-        localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save updated cart to localStorage
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
       } else {
         console.error('Failed to add book to cart:', response.statusText);
       }
@@ -118,8 +117,8 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (bookId) => {
     const updatedCart = cart.filter(item => item.book_id !== bookId);
-    setCart(updatedCart); // Update cart in the context
-    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update localStorage
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   return (

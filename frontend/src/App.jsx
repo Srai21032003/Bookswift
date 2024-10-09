@@ -15,7 +15,6 @@ import InventoryForm from '../components/InventoryForm.jsx';
 import BookInfo from '../components/BookInfo.jsx'; // Correct import
 import Profile from '../src/pages/Profile.jsx'
 import Tracking from '../src/pages/Tracking.jsx'
-import Book from '../src/pages/Book.jsx';
 import Order from '../src/pages/Order.jsx'
 
 
@@ -50,7 +49,6 @@ function App() {
           <Route path="/book/:book_id" element={<BookInfo />} />
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/tracking' element={<Tracking />}></Route>
-          <Route path='/book' element={<Book />}></Route>
           <Route path='/order' element={<Order/>}></Route>
         </Routes>
       </Router>
