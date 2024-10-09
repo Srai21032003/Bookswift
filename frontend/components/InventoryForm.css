@@ -19,8 +19,9 @@ body {
     justify-content: space-between;
     width: 1200px; /* Increased width for better alignment */
     height: auto;
+    /* margin-top: 20px; */
     padding: 20px;
-    margin-top: 50px; /* Reduced margin-top for better visual balance */
+    margin-top: 400px; /* Reduced margin-top for better visual balance */
 }
 
 /* Inventory Section */
@@ -29,6 +30,7 @@ body {
     background-color: #bba3cf;
     padding: 10px;
     border-radius: 15px;
+    margin-top: 80px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -38,7 +40,7 @@ body {
     gap: 15px; /* Added gap between book items */
 }
 
-.book1 {
+.inventory-book {
     display: flex;
     align-items: center; /* Aligns items vertically */
     height: 150px; /* Adjusted height for consistent look */
@@ -49,7 +51,7 @@ body {
     overflow: hidden;
 }
 
-.book-image {
+.inventory-book-image {
     width: 40%;
     height: 100%;
     background-size: cover;
@@ -70,7 +72,7 @@ body {
 }
 
 /* Register Form Section */
-.register-container {
+.inventory-register-container {
     width: 45%;
     background-color: #d9b8e5;
     padding: 30px;

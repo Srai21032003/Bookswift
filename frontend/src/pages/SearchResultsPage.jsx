@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import '../../components/Explore.css'; // Ensure you import the CSS for styling
+import { useLocation, useNavigate } from 'react-router-dom'; // useNavigate instead of useHistory
+import '../../components/Explore.css';
 
 const SearchResultsPage = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // useNavigate for navigation
   const [results, setResults] = useState([]);
 
   useEffect(() => {
@@ -30,36 +31,38 @@ const SearchResultsPage = () => {
     }
   }, [location]);
 
+  const handleBookClick = (bookId) => {
+    navigate(`/book/${bookId}`); // Navigate on click
+  };
+
   return (
     <div className="explore">
       <h1>Search Results</h1>
-      <div className="category-menu">
-        <button>All</button>
-        <button>Fiction</button>
-        <button>Non-Fiction</button>
-        <button>Wellness</button>
-        <button>Kids Books</button>
-      </div>
       <div className="book1s-grid">
         {results.length === 0 ? (
           <p>No results found.</p>
         ) : (
           results.map((book) => (
-            <div className="book1" key={book.book_id}> {/* Assuming book.book_id is the unique identifier */}
+            <div className="book1" key={book.book_id}>
               <div className="book1-cover">
-                <img className="book1-top" src={book.cover_img_url || '/assets/c1.png'} alt={book.title} />
-                <img className="book1-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
+                <img
+                  className="book1-top"
+                  src={book.cover_img_url || '/assets/default-cover.png'}
+                  alt={book.title}
+                />
               </div>
               <div className="preface">
                 <div className="header">
-                  <div className="title">{book.title}</div>
-                  <div className="icon">
-                    <i className="fas fa-chevron-down"></i>
+                  <div
+                    className="title"
+                    onClick={() => handleBookClick(book.book_id)}
+                  >
+                    {book.title}
                   </div>
                 </div>
                 <div className="author">by {book.author}</div>
                 <div className="body">
-                  <p>{book.description || 'No description available.'}</p>
+                  <p>{book.description.slice(0, 100)}...</p>
                 </div>
               </div>
             </div>

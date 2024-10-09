@@ -8,7 +8,7 @@
     font-family: ;
     position: fixed;
     top: 29px;
-    left: 121px;
+    left: 35px;
     right: 121px;
     display: flex;
     justify-content: space-between;
@@ -124,4 +124,17 @@
 
 .dropdown-item:hover {
   background-color: #f1f1f1;
+}
+.profile-dropdown h4 {
+  align-content: center;
+}
+
+#profile-name:hover {
+  background-color: initial;
+}
+
+.logo {
+  height: 40px;
+  align-items: left;
+  transform: translateY(20%);
 }

@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import { handleHome, handleRegister } from '../../components/utils';
 
 function Login() {
-    const navigate = useNavigate(); // Initialize the hook
-
-    const handleSignupRedirect = () => {
-        navigate('/Register'); // Redirect to the Register page
-    };
+    const navigate = useNavigate();
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [keepLoggedIn, setKeepLoggedIn] = useState(false);
 
     const togglePassword = () => {
         setPasswordVisible(!passwordVisible);
@@ -33,7 +31,21 @@ function Login() {
 
             if (response.ok) {
                 alert('Login successful!');
-                navigate('/test'); // Redirect to the home page
+
+                if (keepLoggedIn) {
+                    // Store the token in localStorage if "Keep LogIn?" is checked
+                    localStorage.setItem('authToken', data.token);
+                } else {
+                    // Store the token in sessionStorage for the session only
+                    sessionStorage.setItem('authToken', data.token);
+                }
+
+                // Check the user type and navigate accordingly
+                if (data.userType === 'bookowner') {
+                    navigate('/add-to-shop'); // Redirect bookstore owners to '/add-to-shop'
+                } else {
+                    navigate('/'); // Redirect customers to the home page
+                }
             } else {
                 alert(data.message || 'Invalid email or password!');
             }
@@ -46,7 +58,7 @@ function Login() {
     return (
         <div className="login-container">
             <div className="logo">
-                <img src="/assets/logo.png" alt="Book Swift" width="200" />
+                <img src="/assets/logo.png" alt="Book Swift" width="200" onClick={() => handleHome(navigate)} />
             </div>
             <h2>LOGIN</h2>
             <form id="loginForm" onSubmit={handleSubmit}>
@@ -79,7 +91,12 @@ function Login() {
                 </div>
                 <div className="actions">
                     <label>
-                        <input type="checkbox" /> Keep LogIn?
+                        <input
+                            type="checkbox"
+                            checked={keepLoggedIn}
+                            onChange={() => setKeepLoggedIn(!keepLoggedIn)}
+                        /> 
+                        Keep LogIn?
                     </label>
                     <a href="#">Forgot password</a>
                 </div>
@@ -88,7 +105,7 @@ function Login() {
                 </button>
             </form>
             <div className="signup">
-                Don't have an account? <a href="#" onClick={handleSignupRedirect}>Sign Up</a>
+                Don't have an account? <a href="#" onClick={() => handleRegister(navigate)}>Sign Up</a>
             </div>
         </div>
     );

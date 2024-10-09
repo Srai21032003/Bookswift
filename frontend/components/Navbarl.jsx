@@ -1,12 +1,50 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook for navigation
 import './Navbar.css';
+import { handleExplore, handleHome } from './utils';
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false); // State for profile dropdown
+  const [username, setUsername] = useState('Name'); // State to store the username
+  const [userRole, setUserRole] = useState(''); // State to store the user's role
   const dropdownRef = useRef(null); // Ref to track dropdown for outside clicks
   const navigate = useNavigate();
+
+  // Fetch the username and userRole when the component mounts
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken'); // Ensure to retrieve the token
+      // console.log('Token:', token);
+      if (token) {
+        try {
+          const response = await fetch('/.netlify/functions/getUser', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`, // Send token in Authorization header
+            },
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            setUsername(data.username); // Set the username in state
+            setUserRole(data.userType); // Set the user's role in state
+          } else {
+            console.error(data.message);
+          }
+        } catch (error) {
+          console.error('Error fetching user:', error);
+        }
+      }
+    };
+
+    fetchUser(); // Call the fetchUser function
+  }, []);
+
+  // Log userRole whenever it changes
+  // useEffect(() => {
+  //   console.log('User Role:', userRole);
+  // }, [userRole]); // This will trigger whenever userRole is updated
 
   // Search function
   const handleSearch = async (event) => {
@@ -19,6 +57,10 @@ const Navbar = () => {
     }
   };
 
+  const handleAbout = () => {
+    navigate('/about'); // Redirect to the about page
+  };
+
   // Toggle profile dropdown
   const toggleProfileDropdown = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen); // Toggle the dropdown visibility
@@ -27,7 +69,7 @@ const Navbar = () => {
   const handleSignupClick = () => {
     navigate('/options'); // Redirect to the options page
   };
-  
+
   const handleCartClick = () => {
     navigate('/cart'); // Redirect to the cart page
   };
@@ -38,8 +80,15 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    console.log('Logout Clicked');
-    setIsProfileDropdownOpen(false); // Close the dropdown after clicking
+    // Remove the token from localStorage
+    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
+
+    // Redirect to the homepage
+    navigate('/');
+
+    // Optionally, reload the page to ensure the state is rechecked
+    window.location.reload();
   };
 
   // Close dropdown when clicking outside
@@ -61,11 +110,12 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
+      <img src="/assets/logo.png" alt="" className='logo' onClick={() => handleHome(navigate)}/>
       <ul className="nav-links">
-        <li className="nav-item">Home</li>
-        <li className="nav-item">About</li>
+        <li className="nav-item" onClick={() => handleHome(navigate)}>Home</li>
+        <li className="nav-item" onClick={() => handleAbout(navigate)}>About</li>
         <li className="nav-item">Features</li>
-        <li className="nav-item">Store</li>
+        <li className="nav-item" onClick={() => handleExplore(navigate)}>Store</li>
       </ul>
 
       <div className="search-signup">
@@ -99,7 +149,14 @@ const Navbar = () => {
           {/* Profile Dropdown */}
           {isProfileDropdownOpen && (
             <div className="profile-dropdown" ref={dropdownRef}>
+              <h4 className='dropdown-item5' id='profile-name'>{username}</h4>
+              <button  className="dropdown-item">My Orders</button>
+              <button  className="dropdown-item">Saved Adresses</button>
               <button onClick={handleEditProfile} className="dropdown-item">Edit Profile</button>
+              {/* Conditionally render the "Manage Store" button for bookowners */}
+              {userRole === 'bookowner' && (
+                <button className="dropdown-item" onClick={() => navigate('/add-to-shop')}>Manage Store</button>
+              )}
               <button onClick={handleLogout} className="dropdown-item">Logout</button>
             </div>
           )}

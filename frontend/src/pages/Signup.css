@@ -21,7 +21,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 350px;
-    height: 95vh;
+    height: max-content;
 }
 
 .logo {
@@ -133,4 +133,7 @@ h2 {
 }
 #user-type {
     padding: 0;
+}
+.logo img:hover {
+    cursor: pointer;
 }

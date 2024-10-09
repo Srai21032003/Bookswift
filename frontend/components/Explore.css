@@ -14,7 +14,12 @@
     --font-color: #807b7b;
     --transition: transform 0.7s ease-in-out;
 }
-  
+
+.blank{
+    display: flex;
+    width:100vw;
+    height: 50vh;
+}
 
 .explore {
     min-height: 100vh;
@@ -124,4 +129,9 @@
 .preface .body p:first-child {
     margin-bottom: 15px;
 }
- 
+
+.body button{
+    background-color: pink;
+    margin-left: 40%;
+    width: max-content;
+}
