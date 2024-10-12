@@ -88,7 +88,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (book) => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('authToken')||sessionStorage.getItem('authToken');
       if (!token) {
         console.error('No token found, user is not logged in.');
         return;

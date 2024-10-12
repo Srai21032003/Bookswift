@@ -11,10 +11,10 @@ export async function handler(event) {
     };
   }
 
-  const { book_id } = JSON.parse(event.body);
+  const { book_id, token } = JSON.parse(event.body); // Receive token
 
   // Verify token
-  const tokenVerification = verifyToken(event);
+  const tokenVerification = verifyToken(token); // Pass the token directly
   if (!tokenVerification.valid) {
     return {
       statusCode: tokenVerification.statusCode,
@@ -23,6 +23,7 @@ export async function handler(event) {
   }
 
   const { userId } = tokenVerification.decoded;
+  console.log({userId});
 
   try {
     // Find the cart for the user

@@ -1,8 +1,8 @@
 import { neon } from '@neondatabase/serverless';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { verifyToken } from './verifyToken'; // Your existing token verification function
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-very-secret-key';
+// const JWT_SECRET = process.env.JWT_SECRET || 'your-very-secret-key';
 
 export async function handler(event) {
   if (event.httpMethod !== 'POST') {
@@ -24,6 +24,7 @@ export async function handler(event) {
   }
 
   const { userId } = tokenVerification.decoded;
+  // console.log({ userId});
 
   const sql = neon(process.env.DATABASE_URL);
 

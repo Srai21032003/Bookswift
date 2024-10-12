@@ -35,12 +35,49 @@ const Explore = () => {
     navigate(`/book/${bookId}`); // Navigate to book detail page
   };
 
-  const handleAddToCart = (book) => {
-    if (isLoggedIn) {
-      addToCart(book); // If user is logged in, add the item to the cart
-    } else {
-      alert('Please log in to add items to your cart.'); // Prompt user to log in
-      navigate('/login'); // Navigate to login page
+  // const handleAddToCart = (book) => {
+  //   if (isLoggedIn) {
+  //     addToCart(book); // If user is logged in, add the item to the cart
+  //   } else {
+  //     alert('Please log in to add items to your cart.'); // Prompt user to log in
+  //     navigate('/login'); // Navigate to login page
+  //   }
+  // };
+
+  const handleAddToCart = async (book) => {
+    // Retrieve token from localStorage
+    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+    
+    if (!token) {
+      console.error('No token found, user is not logged in.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/.netlify/functions/addToCart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Include token in Authorization header
+        },
+        body: JSON.stringify({ bookId: book.book_id })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Book added to cart:', data);
+        if (isLoggedIn) {
+          addToCart(book); // If user is logged in, add the item to the cart
+        } else {
+          alert('Please log in to add items to your cart.'); // Prompt user to log in
+          navigate('/login'); // Navigate to login page
+        }
+        // addToCart(book); // Add to cart context after successful response
+      } else {
+        console.error('Failed to add book to cart:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
     }
   };
 
