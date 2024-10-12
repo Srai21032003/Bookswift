@@ -115,11 +115,35 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const removeFromCart = (bookId) => {
-    const updatedCart = cart.filter(item => item.book_id !== bookId);
-    setCart(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  const removeFromCart = async (bookId) => {
+    try {
+      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+      if (!token) {
+        console.error('No token found, user is not logged in.');
+        return;
+      }
+
+      const response = await fetch('/.netlify/functions/removeFromCart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ book_id: bookId }),
+      });
+
+      if (response.ok) {
+        const updatedCart = await response.json();
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+      } else {
+        console.error('Failed to remove book from cart:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error removing from cart:', error);
+    }
   };
+
 
   return (
     <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
