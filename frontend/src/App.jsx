@@ -17,6 +17,7 @@ import Profile from '../src/pages/Profile.jsx'
 import Tracking from '../src/pages/Tracking.jsx'
 import Order from '../src/pages/Order.jsx'
 import PaymentForm from './pages/PaymentForm.jsx';
+import Myorder from './pages/Myorder.jsx';
 
 
 function App() {
@@ -51,7 +52,8 @@ function App() {
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/tracking' element={<Tracking />}></Route>
           <Route path='/order' element={<Order/>}></Route>
-          <Route path='/card-pay' element={<PaymentForm/>}></Route>
+          <Route path='/card-pay' element={<PaymentForm />}></Route>
+          <Route path='/myorder' element={<Myorder/>}></Route>
         </Routes>
       </Router>
     </CartProvider>

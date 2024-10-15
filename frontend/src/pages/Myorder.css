@@ -1,0 +1,117 @@
+.my-orders-container {
+    padding: 20px;
+    background-color: #f3f1fa;
+    max-height: 600px;
+    /* Set the maximum height for the container */
+    overflow-y: hidden;
+    /* Prevent the entire container from overflowing */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.orders-scrollable {
+    max-height: 450px;
+    /* Set the max height for scrollable content */
+    overflow-y: auto;
+    /* Enable vertical scrolling if content overflows */
+}
+
+.order-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.order-id {
+    font-weight: bold;
+    color: #555;
+}
+
+.order-date {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.order-item {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.order-item img {
+    border-radius: 4px;
+    width: 70px;
+    height: 100px;
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.order-status {
+    font-weight: bold;
+    color: #4CAF50;
+    /* Green for delivered */
+}
+
+.order-delivery {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.order-total {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #673ab7;
+    /* Purple */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #5e35b1;
+}
+
+.cancel-order {
+    background-color: #e53935;
+    /* Red for cancel */
+}
+
+.cancel-order:hover {
+    background-color: #d32f2f;
+}
