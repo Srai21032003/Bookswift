@@ -17,44 +17,25 @@ const Order = () => {
   const handleConfirmOrder = async () => {
     const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
     if (!token) {
-      console.error('No token found, user is not logged in.');
-      return;
+        console.error('No token found, user is not logged in.');
+        return;
     }
-    // console.log("Token",token);
-
-    setIsLoading(true);
 
     const totalAmount = (parseFloat(totalPrice) + deliveryCharge + platformCharge).toFixed(2);
-    const status = "Pending";  // Initial order status
+    const status = "Pending"; // Initial order status
 
-    try {
-      // console.log("token:",token);
-      const response = await fetch('/.netlify/functions/confirmOrder', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          token,
-          totalAmount,
-          status,
-          book_id: cart.map(item => item.book_id), // assuming multiple books
-        }),
-      });
+    // Prepare the order data to pass to the PaymentForm
+    const orderData = {
+        totalAmount,
+        status,
+        cart, // Pass the cart for processing in PaymentForm
+        token // Pass the token for authentication
+    };
 
-      if (response.ok) {
-        const orderData = await response.json();
-        navigate('/tracking', { state: orderData[0] });  // Navigate to tracking page with order details
-      } else {
-        console.error('Failed to confirm order:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error confirming order:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    // Navigate to PaymentForm with order data
+    navigate('/card-pay', { state: orderData });
+};
+
 
   const finalTotalPrice = (parseFloat(totalPrice) + deliveryCharge + platformCharge).toFixed(2);
 
@@ -96,7 +77,8 @@ const Order = () => {
       <div className="total">
         <h2>Total: ₹{finalTotalPrice}</h2>
         <button className="checkout-btn" onClick={handleConfirmOrder} disabled={isLoading}>
-          {isLoading ? 'Confirming...' : 'Confirm Order'}
+          {/* {isLoading ? 'Confirming...' : 'Confirm Order'} */}
+          Confirm Order
         </button>
       </div>
     </div>
