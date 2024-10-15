@@ -150,7 +150,7 @@ const Navbar = () => {
           {isProfileDropdownOpen && (
             <div className="profile-dropdown" ref={dropdownRef}>
               <h4 className='dropdown-item5' id='profile-name'>{username}</h4>
-              <button  className="dropdown-item">My Orders</button>
+              <button  className="dropdown-item" onClick={() => navigate('/myorder')}>My Orders</button>
               <button  className="dropdown-item">Saved Adresses</button>
               <button onClick={handleEditProfile} className="dropdown-item">Edit Profile</button>
               {/* Conditionally render the "Manage Store" button for bookowners */}
