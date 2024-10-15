@@ -50,8 +50,8 @@ export async function handler(event) {
         // Combine book details and inventory details
         const bookDetails = {
             ...book,
-            price: inventory.price || 0.00, // Ensure price has a fallback value
-            quantity: inventory.quantity || 0, // Ensure quantity has a fallback value
+            price: parseFloat(inventory.price) || 0.00, // Ensure price has a fallback value
+            quantity: parseInt(inventory.quantity) || 0, // Ensure quantity has a fallback value
         };
 
         return {

@@ -14,6 +14,7 @@ const BookInfo = () => {
         const response = await fetch(`/.netlify/functions/fetchBookDetails?book_id=${book_id}`);
         if (response.ok) {
           const data = await response.json();
+          console.log('Fetched book details:', data);
           setBookDetails(data);
         } else {
           console.error('Error fetching book details:', response.statusText);
