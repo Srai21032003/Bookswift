@@ -144,6 +144,13 @@ export async function handler(event) {
       `;
       await sql(insertOrderItemQuery, [newOrder.order_id, id, quantity]);
 
+      const updateInventoryQuery = `
+                UPDATE Inventory
+                SET quantity = quantity - 1
+                WHERE book_id = $1 AND quantity > 0;
+            `;
+            await sql(updateInventoryQuery, [id]);
+
       // Push order detail into the array
       orderDetails.push({
         order_id: newOrder.order_id,
