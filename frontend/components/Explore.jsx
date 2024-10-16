@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate instead of useHistory
 import { useCart } from '../src/contexts/cartContext';
 import './Explore.css';
+import Navbar from './Navbar';
 
 const Explore = () => {
   const { addToCart } = useCart();
@@ -13,7 +14,6 @@ const Explore = () => {
     // Check if the user is logged in by checking for a token in localStorage or sessionStorage
     const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
     setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists
-
     const fetchBooks = async () => {
       try {
         const response = await fetch('/.netlify/functions/fetchBooks');
@@ -83,7 +83,9 @@ const Explore = () => {
 
   return (
     <div className="explore">
+      {isLoggedIn ? <Navbarl /> : <Navbar />}
       <h1>OUR BOOKS CATALOG</h1>
+        
       <div className="book1s-grid">
         {books.length === 0 ? (
           <p>No books found.</p>
