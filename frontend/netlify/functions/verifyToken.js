@@ -21,3 +21,4 @@ export const verifyToken = (event) => {
         return { valid: false, message: 'Token verification failed', statusCode: 401 };
     }
 };
+
