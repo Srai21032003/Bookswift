@@ -66,6 +66,7 @@ function InventoryForm() {
             if (response.ok) {
                 // navigate('/success');
                 window.alert("Book Added Successfully");
+                fetchInventory(shopId); //refresh inventory
             } else {
                 const errorData = await response.json();
                 window.alert(errorData.message);
